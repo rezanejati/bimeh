@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ir.eniac.tech.bimeh.com.sdk.bimeh" >
-
+    package="ir.eniac.tech.bimeh.com.sdk.bimeh">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -9,12 +9,14 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-
-
-
     <application
-        android:name=".EniacApplication"
-        android:supportsRtl="true">
+        android:supportsRtl="false"
+        android:theme="@style/MyMaterialTheme">
+
+        <activity android:name=".view.activity.main.MainBimeh"/>
+
+
+
 
     </application>
 

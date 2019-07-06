@@ -3,10 +3,11 @@ package ir.eniac.tech.bimeh.com.sdk.bimeh;
 import android.app.Application;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.support.multidex.MultiDex;
 
 import com.pixplicity.easyprefs.library.Prefs;
 
+import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.font.CustomViewWithTypefaceSupport;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.font.TextField;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class EniacApplication extends Application
@@ -18,7 +19,6 @@ public class EniacApplication extends Application
     protected void attachBaseContext(Context base)
     {
         super.attachBaseContext(base);
-        MultiDex.install(this);
     }
 
     @Override
@@ -36,13 +36,13 @@ public class EniacApplication extends Application
 
 //        SingletonService.getInstance().setNetComponent(mNetComponent).inject();
 
-//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-//                .setDefaultFontPath("fonts/iran_sans_normal.ttf")
-//                .setFontAttrId(R.attr.fontPath)
-//                .addCustomViewWithSetTypeface(CustomViewWithTypefaceSupport.class)
-//                .addCustomStyle(TextField.class, R.attr.textFieldStyle)
-//                .build()
-//        );
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/iran_sans_normal.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .addCustomViewWithSetTypeface(CustomViewWithTypefaceSupport.class)
+                .addCustomStyle(TextField.class, R.attr.textFieldStyle)
+                .build()
+        );
         new Prefs.Builder()
                 .setContext(this)
                 .setMode(ContextWrapper.MODE_PRIVATE)

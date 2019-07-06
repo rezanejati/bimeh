@@ -1,3 +1,7 @@
 <resources>
+
     <string name="app_name">Bimeh-com</string>
+
+    <string name="backf_icon">&#xf061;</string>
+
 </resources>
