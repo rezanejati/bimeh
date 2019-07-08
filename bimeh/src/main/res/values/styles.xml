@@ -27,13 +27,21 @@
     </style>
 
     <style name="IconFontsf" parent="android:TextAppearance">
-        <item name="fontPath">fonts/icomoonf.ttf</item>
+        <item name="fontPath">font/icomoonf.ttf</item>
     </style>
 
     <style name = "MyMaterialTheme.AppBarOverlay" parent = "ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name = "MyMaterialTheme.PopupOverlay" parent = "ThemeOverlay.AppCompat.Light" />
 
+
+    <style name="IconText" parent="android:TextAppearance">
+        <!-- Custom Attr-->
+        <item name="fontPath">font/MaterialIcons-Regular.ttf</item>
+        <item name="android:textSize">@dimen/icon_size</item>
+        <item name="android:textColor">@color/menuColor</item>
+
+    </style>
 
 
     <!--<style name="myRatingBar" parent="android:style/Widget.Material.RatingBar.Small">-->

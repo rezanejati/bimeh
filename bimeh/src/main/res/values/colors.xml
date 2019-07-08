@@ -15,4 +15,8 @@
     <color name="color_border_main_menu">#4DB6AC</color>
     <color name="textIconColor">#000</color>
     <color name="menu_icon_color">#000</color>
+    <color name="spinnerBackgroundItems">#fff</color>
+    <color name="menuColor">#00796B</color>
+    <color name="spinnerColorBorder">#00796B</color>
+    <color name="buttonBackgroundColor">#4DB6AC</color>
 </resources>

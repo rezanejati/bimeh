@@ -37,7 +37,7 @@ public class EniacApplication extends Application
 //        SingletonService.getInstance().setNetComponent(mNetComponent).inject();
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/iran_sans_normal.ttf")
+                .setDefaultFontPath("font/iran_sans_normal.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .addCustomViewWithSetTypeface(CustomViewWithTypefaceSupport.class)
                 .addCustomStyle(TextField.class, R.attr.textFieldStyle)

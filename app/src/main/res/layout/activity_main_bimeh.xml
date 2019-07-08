@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/windowsBackgroundColor"
-    tools:context=".view.activity.main.MainBimeh">
+    android:background="@color/windowsBackgroundColor">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -362,6 +361,7 @@
                     android:layout_marginTop="8dp">
 
                     <RelativeLayout
+                        android:id="@+id/layThirdParty"
                         android:layout_width="130dp"
                         android:layout_height="130dp"
                         android:gravity="center"
@@ -377,7 +377,7 @@
                             android:layout_height="45dp"
                             android:layout_alignParentRight="true"
                             app:cardBackgroundColor="@color/cardViewBackgroundPrimary"
-                            app:cardCornerRadius="20dp"
+                            app:cardCornerRadius="32dp"
                             app:cardElevation="3dp">
 
                             <RelativeLayout

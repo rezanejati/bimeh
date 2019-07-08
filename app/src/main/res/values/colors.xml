@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#fff</color>
     <color name="colorAccent">#aaa</color>
     <color name="textColorPrimary">#000</color>
+    <color name="textColorSecondary">#fff</color>
     <color name="textColorTitle">#000</color>
     <color name="textColorContent">#000</color>
+    <color name="windowsBackgroundColor">#F5F5F5</color>
+
+    <color name="menuColorBackground">#fff</color>
+    <color name="text_color_main_menu">#00796B</color>
+    <color name="cardViewBackgroundPrimary">#4DB6AC</color>
+    <color name="color_border_main_menu">#4DB6AC</color>
+    <color name="textIconColor">#000</color>
+    <color name="menu_icon_color">#000</color>
 </resources>

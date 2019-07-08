@@ -12,12 +12,8 @@
     <application
         android:supportsRtl="false"
         android:theme="@style/MyMaterialTheme">
-
-        <activity android:name=".view.activity.main.MainBimeh"/>
-
-
-
-
+        <activity android:name=".view.activity.thirdParty.ThirdPartyActivity"></activity>
+        <activity android:name="ir.eniac.tech.bimeh.com.sdk.app.MainBimeh2" />
     </application>
 
 </manifest>

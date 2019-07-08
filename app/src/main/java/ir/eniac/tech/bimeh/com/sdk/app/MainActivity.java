@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
-import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.main.MainBimeh;
-
 public class MainActivity extends AppCompatActivity
 {
 
