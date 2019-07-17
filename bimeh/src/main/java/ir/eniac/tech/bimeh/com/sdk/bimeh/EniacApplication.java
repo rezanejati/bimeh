@@ -6,14 +6,24 @@ import android.content.ContextWrapper;
 
 import com.pixplicity.easyprefs.library.Prefs;
 
+import ir.eniac.tech.bimeh.com.sdk.bimeh.di.component.DaggerNetComponent;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.di.component.NetComponent;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.di.module.AppModule;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.di.module.NetModule;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.SingletonService;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.helper.Const;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.singleton.SingletonContext;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.font.CustomViewWithTypefaceSupport;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.font.TextField;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class EniacApplication extends Application
 {
-//    private NetComponent mNetComponent;
+    private NetComponent mNetComponent;
 
+
+//    @Inject
+//    CalligraphyConfig mCalligraphyConfig;
 
     @Override
     protected void attachBaseContext(Context base)
@@ -25,16 +35,16 @@ public class EniacApplication extends Application
     public void onCreate()
     {
         super.onCreate();
-//        SingletonContext.Companion.getInstance().setContext(this);
-//        SingletonService.getInstance().setContext(this);
+        SingletonContext.Companion.getInstance().setContext(this);
+        SingletonService.getInstance().setContext(this);
 
 
-//        mNetComponent = DaggerNetComponent.builder()
-//                .appModule(new AppModule(this))
-//                .netModule(new NetModule(Const.BASEURL))
-//                .build();
+        mNetComponent = DaggerNetComponent.builder()
+                .appModule(new AppModule(this))
+                .netModule(new NetModule(Const.BASEURL))
+                .build();
 
-//        SingletonService.getInstance().setNetComponent(mNetComponent).inject();
+        SingletonService.getInstance().setNetComponent(mNetComponent).inject();
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("font/iran_sans_normal.ttf")
@@ -43,14 +53,13 @@ public class EniacApplication extends Application
                 .addCustomStyle(TextField.class, R.attr.textFieldStyle)
                 .build()
         );
+
         new Prefs.Builder()
                 .setContext(this)
                 .setMode(ContextWrapper.MODE_PRIVATE)
                 .setPrefsName(getPackageName())
                 .setUseDefaultSharedPreference(true)
                 .build();
-
-
     }
 
 

@@ -20,7 +20,7 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/MyMaterialTheme.PopupOverlay">
 
-            <include layout="@layout/toolbar"/>
+            <include layout="@layout/toolbar_insurance"/>
 
         </android.support.v7.widget.Toolbar>
 

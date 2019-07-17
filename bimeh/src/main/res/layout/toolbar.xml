@@ -13,7 +13,7 @@
         android:gravity="center"
         android:padding="5dp"
         android:text="بیمه"
-        android:textColor="@color/browser_actions_text_color"
+        android:textColor="@color/textColorPrimary"
         android:textSize="18sp" />
 
     <FrameLayout
