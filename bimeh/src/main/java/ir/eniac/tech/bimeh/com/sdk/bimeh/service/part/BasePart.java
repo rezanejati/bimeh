@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -42,7 +44,7 @@ public abstract class BasePart
     }
 
 
-    public <T> void start(Observable<Response<T>> observable, OnServiceStatus<T> listener)
+    public <T> void start(Single<Response<T>> observable, OnServiceStatus<T> listener)
     {
         if (!BuildConfig.DEBUG)
         {
@@ -65,12 +67,12 @@ public abstract class BasePart
     }
 
 
-    private <T> void call(Observable<Response<T>> observable, OnServiceStatus<T> listener)
+    private <T> void call(Single<Response<T>> observable, OnServiceStatus<T> listener)
     {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
-                .subscribe(new Observer<Response<T>>()
+                .subscribe(new SingleObserver<Response<T>>()
                 {
                     @Override
                     public void onSubscribe(Disposable d)
@@ -79,32 +81,25 @@ public abstract class BasePart
                     }
 
                     @Override
-                    public void onNext(Response<T> value)
+                    public void onSuccess(Response<T> tResponse)
                     {
                         if (BuildConfig.DEBUG && Const.TEST)
                         {
-                            SingletonResponse.getInstance().addResponse(value);
+                            SingletonResponse.getInstance().addResponse(tResponse);
                         }
                         if (BuildConfig.DEBUG)
                         {
-                            Log.e("--URL--", value.raw().request().url().toString());
-                            Log.e("--Body--", bodyToString(value.raw().request().body()));
+                            Log.e("--URL--", tResponse.raw().request().url().toString());
+                            Log.e("--Body--", bodyToString(tResponse.raw().request().body()));
                         }
-                        listener.onReady(value.body());
+                        listener.onReady(tResponse.body());
                     }
-
 
                     @Override
                     public void onError(Throwable e)
                     {
                         e.printStackTrace();
                         listener.onError(e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete()
-                    {
-
                     }
                 });
     }

@@ -48,7 +48,7 @@
                     android:layout_marginRight="8dp"
                     android:layout_weight="3"
                     android:gravity="right"
-                    android:text="برند خودرو"
+                    android:text="مدل خودرو"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/textColorTitle" />
 
@@ -76,7 +76,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="4dp"
@@ -95,11 +95,16 @@
                         <android.support.v7.widget.AppCompatSpinner
                             android:id="@+id/spinnerBrandModel"
                             android:layout_width="match_parent"
-                            android:layout_height="30sp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
                             android:background="@null" />
+                        
+                        <ProgressBar
+                            android:id="@+id/progressBrandModel"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp" />
 
                     </RelativeLayout>
 
@@ -112,7 +117,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="4dp"
@@ -131,7 +136,7 @@
                         <android.support.v7.widget.AppCompatSpinner
                             android:id="@+id/spinnerBrand"
                             android:layout_width="match_parent"
-                            android:layout_height="30sp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
@@ -183,7 +188,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="4dp"
@@ -193,7 +198,7 @@
                         <TextView
                             android:id="@+id/tvDate"
                             android:layout_width="match_parent"
-                            android:layout_height="30sp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="3dp"
                             android:layout_marginRight="3dp"
@@ -212,7 +217,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="4dp"
@@ -231,7 +236,7 @@
                         <android.support.v7.widget.AppCompatSpinner
                             android:id="@+id/spinnerCreateDate"
                             android:layout_width="match_parent"
-                            android:layout_height="30sp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
@@ -284,7 +289,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="4dp"
@@ -303,7 +308,7 @@
                         <android.support.v7.widget.AppCompatSpinner
                             android:id="@+id/spinnerDamageDiscount"
                             android:layout_width="match_parent"
-                            android:layout_height="30sp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
@@ -320,7 +325,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="4dp"
@@ -339,7 +344,7 @@
                         <android.support.v7.widget.AppCompatSpinner
                             android:id="@+id/spinnerDamageStatus"
                             android:layout_width="match_parent"
-                            android:layout_height="30sp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
@@ -392,7 +397,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="4dp"
@@ -411,7 +416,7 @@
                         <android.support.v7.widget.AppCompatSpinner
                             android:id="@+id/spinnerDeathDamageCount"
                             android:layout_width="match_parent"
-                            android:layout_height="30sp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
@@ -428,7 +433,7 @@
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="4dp"
@@ -447,7 +452,7 @@
                         <android.support.v7.widget.AppCompatSpinner
                             android:id="@+id/spinnerFinancialDamageCount"
                             android:layout_width="match_parent"
-                            android:layout_height="30sp"
+                            android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
