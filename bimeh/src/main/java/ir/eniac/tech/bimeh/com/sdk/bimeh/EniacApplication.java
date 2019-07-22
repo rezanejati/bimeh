@@ -3,6 +3,7 @@ package ir.eniac.tech.bimeh.com.sdk.bimeh;
 import android.app.Application;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.support.multidex.MultiDex;
 
 import com.pixplicity.easyprefs.library.Prefs;
 
@@ -29,6 +30,7 @@ public class EniacApplication extends Application
     protected void attachBaseContext(Context base)
     {
         super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     @Override

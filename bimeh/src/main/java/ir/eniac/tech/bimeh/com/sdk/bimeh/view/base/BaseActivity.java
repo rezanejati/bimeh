@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import dagger.android.AndroidInjection;
 
 import javax.inject.Inject;
 
@@ -19,8 +20,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public abstract class BaseActivity<D extends ViewDataBinding, V extends BaseViewModel> extends AppCompatActivity
 {
     private ProgressDialog mProgressDialog;
-    private D dataBinding;
-    private V viewModel;
+    protected D dataBinding;
+    protected V viewModel;
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -35,7 +36,7 @@ public abstract class BaseActivity<D extends ViewDataBinding, V extends BaseView
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
 //        AndroidSupportInjection.inject(this);
-//        AndroidInjection.inject(this);
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel());
         dataBinding = DataBindingUtil.setContentView(this, getLayoutRes());

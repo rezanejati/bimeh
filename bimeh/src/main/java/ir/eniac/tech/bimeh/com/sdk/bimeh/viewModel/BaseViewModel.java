@@ -6,10 +6,11 @@ import android.databinding.ObservableBoolean;
 import java.lang.ref.WeakReference;
 
 import io.reactivex.disposables.CompositeDisposable;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty.ThirdPartyActivity;
 
 public abstract class BaseViewModel<N> extends ViewModel
 {
-    private WeakReference<N> mNavigator;
+    private N mNavigator;
 
     private final ObservableBoolean mIsLoading = new ObservableBoolean();
 
@@ -32,12 +33,12 @@ public abstract class BaseViewModel<N> extends ViewModel
         return mCompositeDisposable;
     }
 
-    public WeakReference<N> getNavigator()
+    public N getNavigator()
     {
         return mNavigator;
     }
 
-    public void setNavigator(WeakReference<N> mNavigator)
+    public void setNavigator(N mNavigator)
     {
         this.mNavigator = mNavigator;
     }

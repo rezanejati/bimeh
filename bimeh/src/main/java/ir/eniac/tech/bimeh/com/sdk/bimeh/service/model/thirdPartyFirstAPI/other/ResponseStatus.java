@@ -1,6 +1,8 @@
 
 package ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,9 +14,11 @@ public class ResponseStatus
     @SerializedName("Value")
     @Expose
     private String value;
+
     @SerializedName("ErrorList")
     @Expose
-    private List<Object> errorList = null;
+    @Nullable
+    private List<String> errorList = null;
 
     public String getValue()
     {
@@ -26,12 +30,12 @@ public class ResponseStatus
         this.value = value;
     }
 
-    public List<Object> getErrorList()
+    public List<String> getErrorList()
     {
         return errorList;
     }
 
-    public void setErrorList(List<Object> errorList)
+    public void setErrorList(List<String> errorList)
     {
         this.errorList = errorList;
     }

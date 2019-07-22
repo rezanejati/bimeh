@@ -16,5 +16,6 @@ public class Const
 //    public final static String BASEURL = "http://192.168.20.242:1031/MainService.svc/";
 
     public final static String ThirdPartyFirstAPI = "ThirdParty/FirstRequest";
+    public final static String ThirdPartyBrandModelList = "ThirdParty/ModelList";
 
 }
