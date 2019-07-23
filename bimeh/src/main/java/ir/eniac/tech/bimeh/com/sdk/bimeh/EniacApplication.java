@@ -1,5 +1,6 @@
 package ir.eniac.tech.bimeh.com.sdk.bimeh;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -7,7 +8,13 @@ import android.support.multidex.MultiDex;
 
 import com.pixplicity.easyprefs.library.Prefs;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.di.component.DaggerNetComponent;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.di.component.DaggerViewModelComponent;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.di.component.NetComponent;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.di.module.AppModule;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.di.module.NetModule;
@@ -19,9 +26,12 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.font.TextField;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class EniacApplication extends Application
+//        implements HasActivityInjector
 {
     private NetComponent mNetComponent;
 
+//    @Inject
+//    DispatchingAndroidInjector<Activity> activityDispatchingInjector;
 
 //    @Inject
 //    CalligraphyConfig mCalligraphyConfig;
@@ -40,11 +50,15 @@ public class EniacApplication extends Application
         SingletonContext.Companion.getInstance().setContext(this);
         SingletonService.getInstance().setContext(this);
 
-
         mNetComponent = DaggerNetComponent.builder()
                 .appModule(new AppModule(this))
                 .netModule(new NetModule(Const.BASEURL))
                 .build();
+
+        DaggerViewModelComponent.builder()
+                .application(this)
+                .build()
+                .inject(this);
 
         SingletonService.getInstance().setNetComponent(mNetComponent).inject();
 
@@ -72,4 +86,9 @@ public class EniacApplication extends Application
     }
 
 
+//    @Override
+//    public AndroidInjector<Activity> activityInjector()
+//    {
+//        return activityDispatchingInjector;
+//    }
 }

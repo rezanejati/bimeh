@@ -16,7 +16,7 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.BuildConfig;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.ServiceGenerator;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.helper.Const;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.listener.OnServiceStatus;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.mock.MockProcessor;
+//import ir.eniac.tech.bimeh.com.sdk.bimeh.service.mock.MockProcessor;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.SingletonResponse;
 import okhttp3.RequestBody;
 import okio.Buffer;
@@ -51,7 +51,7 @@ public abstract class BasePart
             call(observable, listener);
             return;
         }
-        MockProcessor<T> mockProcessor = new MockProcessor<>(listener, getPart());
+       /* MockProcessor<T> mockProcessor = new MockProcessor<>(listener, getPart());
         if (Const.MOCK && mockProcessor.getRawRes() != null && mockProcessor.loadJSONFromAsset() != null)
         {
             T model = mockProcessor.getMockModel();
@@ -62,7 +62,7 @@ public abstract class BasePart
             }
             new Handler().postDelayed(() -> listener.onReady(model), 50);
             return;
-        }
+        }*/
         call(observable, listener);
     }
 

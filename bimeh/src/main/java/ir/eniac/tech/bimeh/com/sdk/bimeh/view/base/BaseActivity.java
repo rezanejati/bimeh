@@ -36,7 +36,7 @@ public abstract class BaseActivity<D extends ViewDataBinding, V extends BaseView
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
 //        AndroidSupportInjection.inject(this);
-        AndroidInjection.inject(this);
+//        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel());
         dataBinding = DataBindingUtil.setContentView(this, getLayoutRes());

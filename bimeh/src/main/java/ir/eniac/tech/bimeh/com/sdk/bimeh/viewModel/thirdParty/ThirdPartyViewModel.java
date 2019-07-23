@@ -3,6 +3,7 @@ package ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +92,7 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 
     public void OnClickInquery()
     {
+        Log.e("--VM onClick--", "OnClickInquery");
         getNavigator().openThirdPartyInqueryActivity();
     }
 

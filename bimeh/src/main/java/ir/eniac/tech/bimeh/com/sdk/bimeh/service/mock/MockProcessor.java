@@ -1,3 +1,4 @@
+/*
 package ir.eniac.tech.bimeh.com.sdk.bimeh.service.mock;
 
 import com.example.type.TypeResolver;
@@ -11,9 +12,11 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.SingletonService;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.listener.OnServiceStatus;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.part.BasePart;
 
+*/
 /**
  * Created by Javad.Abadi on 4/11/2018.
- */
+ *//*
+
 public class MockProcessor<T>
 {
     private OnServiceStatus<T> listener;
@@ -86,4 +89,4 @@ public class MockProcessor<T>
         gson = new Gson();
         return gson.fromJson(loadJSONFromAsset(), (Class<T>) mock.response());
     }
-}
+}*/
