@@ -34,25 +34,25 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     private List<AvailableYear> availableYears = new ArrayList<>();
 
     @Getter @Setter
-    private ObservableField<List<String>> brandListEntries = new ObservableField<>();
+    private MutableLiveData<List<String>> brandListEntries = new MutableLiveData<>();
 
     @Getter @Setter
-    private ObservableField<List<String>> damageStatusListEntries = new ObservableField<>();
+    private MutableLiveData<List<String>> damageStatusListEntries = new MutableLiveData<>();
 
     @Getter @Setter
-    private ObservableField<List<String>> fullNoDamageYearListEntries = new ObservableField<>();
+    private MutableLiveData<List<String>> fullNoDamageYearListEntries = new MutableLiveData<>();
 
     @Getter @Setter
-    private ObservableField<List<String>> financialDamageTypeListEntries = new ObservableField<>();
+    private MutableLiveData<List<String>> financialDamageTypeListEntries = new MutableLiveData<>();
 
     @Getter @Setter
-    private ObservableField<List<String>> lifeDamageTypeListEntries = new ObservableField<>();
+    private MutableLiveData<List<String>> lifeDamageTypeListEntries = new MutableLiveData<>();
 
     @Getter @Setter
-    private ObservableField<List<String>> companyListEntries = new ObservableField<>();
+    private MutableLiveData<List<String>> companyListEntries = new MutableLiveData<>();
 
     @Getter @Setter
-    private ObservableField<List<String>> availableYearsEntries = new ObservableField<>();
+    private MutableLiveData<List<String>> availableYearsEntries = new MutableLiveData<>();
 
     @Getter @Setter
     private MutableLiveData<Integer> brandListItemPosition = new MutableLiveData<>();
@@ -84,6 +84,11 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     @Getter @Setter
     private MutableLiveData<String> availableYearsItemValue = new MutableLiveData<>();
 
+    public ThirdPartyViewModel()
+    {
+        super();
+        loadMainMenus();
+    }
 
     public void loadMainMenus()
     {
@@ -148,49 +153,49 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
         {
             list.add(item.getText());
         }
-        brandListEntries.set(list);
+        brandListEntries.setValue(list);
         list.clear();
 
         for (DamageStatusList item: damageStatusList)
         {
             list.add(item.getText());
         }
-        damageStatusListEntries.set(list);
+        damageStatusListEntries.setValue(list);
         list.clear();
 
         for (FullNoDamageYearList item: fullNoDamageYearList)
         {
             list.add(item.getText());
         }
-        fullNoDamageYearListEntries.set(list);
+        fullNoDamageYearListEntries.setValue(list);
         list.clear();
 
         for (FinancialDamageTypeList item: financialDamageTypeList)
         {
             list.add(item.getText());
         }
-        financialDamageTypeListEntries.set(list);
+        financialDamageTypeListEntries.setValue(list);
         list.clear();
 
         for (LifeDamageTypeList item: lifeDamageTypeList)
         {
             list.add(item.getText());
         }
-        lifeDamageTypeListEntries.set(list);
+        lifeDamageTypeListEntries.setValue(list);
         list.clear();
 
         for (CompanyList item: companyList)
         {
             list.add(item.getText());
         }
-        companyListEntries.set(list);
+        companyListEntries.setValue(list);
         list.clear();
 
         for (AvailableYear item: availableYears)
         {
             list.add(item.getText());
         }
-        availableYearsEntries.set(list);
+        availableYearsEntries.setValue(list);
         list.clear();
 
     }
