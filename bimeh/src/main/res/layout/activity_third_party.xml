@@ -223,6 +223,9 @@
                                 android:layout_marginLeft="3dp"
                                 android:layout_marginRight="3dp"
                                 android:background="@null"
+                                android:clickable="true"
+                                android:text="@{viewModel.tvDate}"
+                                android:onClick="@{() -> viewModel.onDatePickerClick()}"
                                 android:drawableLeft="@drawable/ic_calendar_black_24dp"
                                 android:drawableTint="@color/menuColor" />
 

@@ -25,6 +25,9 @@ import lombok.Setter;
 
 public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> implements OnServiceStatus<ThirdPartyFirstResponse>
 {
+    @Getter @Setter
+    private MutableLiveData<String> tvDate;
+
     private List<BrandList> brandList = new ArrayList<>();
     private List<DamageStatusList> damageStatusList = new ArrayList<>();
     private List<FullNoDamageYearList> fullNoDamageYearList = new ArrayList<>();
@@ -87,6 +90,8 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     public ThirdPartyViewModel()
     {
         super();
+        tvDate = new MutableLiveData<>();
+
         loadMainMenus();
     }
 
@@ -109,6 +114,13 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     public void onSelectItemSpinner()
     {
 
+    }
+
+    public void onDatePickerClick()
+    {
+        Log.e("--VM--", "onDatePickerClick()");
+        //for test
+        tvDate.setValue("1398/06/01");
     }
 
     @Override
