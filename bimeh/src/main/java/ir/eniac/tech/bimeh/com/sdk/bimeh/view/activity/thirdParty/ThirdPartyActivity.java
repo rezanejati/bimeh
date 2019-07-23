@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import ir.eniac.tech.bimeh.com.sdk.bimeh.BR;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.R;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.databinding.ActivityThirdPartyBinding;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.base.BaseActivity;
@@ -22,9 +23,20 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         initView();
     }
 
+    @Override
+    public int getBindingVariable()
+    {
+        return BR.viewModel;
+    }
+
     private void initView()
     {
-//        ArrayAdapter<String> brandListAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item);
+        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+
+//        dataBinding.setViewModel(viewModel);
+        dataBinding.setSpinnerAdapter(arrayAdapter);
+
         dataBinding.spinnerBrand.setSelection(0);
         dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
         dataBinding.spinnerBrandModel.setSelection(0);
