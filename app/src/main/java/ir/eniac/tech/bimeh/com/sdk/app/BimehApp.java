@@ -3,9 +3,11 @@ package ir.eniac.tech.bimeh.com.sdk.app;
 import android.content.Context;
 import android.util.Log;
 
+import dagger.android.HasActivityInjector;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.EniacApplication;
 
 public class BimehApp extends EniacApplication
+//        implements HasActivityInjector
 {
 
     @Override
