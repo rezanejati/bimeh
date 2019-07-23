@@ -40,7 +40,11 @@ public abstract class BaseActivity<D extends ViewDataBinding, V extends BaseView
         super.onCreate(savedInstanceState);
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel());
         dataBinding = DataBindingUtil.setContentView(this, getLayoutRes());
+        dataBinding.setVariable(getBindingVariable(), viewModel);
+        dataBinding.executePendingBindings();
     }
+
+    public abstract int getBindingVariable();
 
     protected abstract Class<V> getViewModel();
 

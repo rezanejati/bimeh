@@ -36,9 +36,6 @@ public class EniacApplication extends Application
 //    @Inject
 //    CalligraphyConfig mCalligraphyConfig;
 
-//    @Inject
-//    CalligraphyConfig mCalligraphyConfig;
-
     @Override
     protected void attachBaseContext(Context base)
     {
