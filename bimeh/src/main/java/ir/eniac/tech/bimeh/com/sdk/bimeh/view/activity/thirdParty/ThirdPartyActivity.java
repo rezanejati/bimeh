@@ -52,7 +52,7 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         dataBinding.spinnerFinancialDamageCount.setSelection(0);
         dataBinding.spinnerFinancialDamageCount.setGravity(View.TEXT_ALIGNMENT_CENTER);
 
-        viewModel.loadMainMenus();
+//        viewModel.loadMainMenus();
     }
 
     @Override
