@@ -6,13 +6,17 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ir.eniac.tech.bimeh.com.sdk.bimeh.BR;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.R;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.databinding.ActivityThirdPartyBinding;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.BrandList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.base.BaseActivity;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel;
 
-public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyNavigator
+public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyNavigator,ThirdPartyViewModel.SpinnerData
 {
 
     @Override
@@ -21,6 +25,7 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         super.onCreate(savedInstanceState);
         viewModel.setNavigator(this);
         initView();
+        viewModel.setSpinnerData(this);
     }
 
     @Override
@@ -31,12 +36,11 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 
     private void initView()
     {
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item);
-        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+
 
         dataBinding.tvDate.setText(viewModel.getTvDate().getValue());
 //        dataBinding.setViewModel(viewModel);
-        dataBinding.setSpinnerAdapter(arrayAdapter);
+
 
         dataBinding.spinnerBrand.setSelection(0);
         dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
@@ -74,11 +78,27 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
     @Override
     public void openThirdPartyInqueryActivity()
     {
-        Toast.makeText(this, "open ThirdPartyInqueryActivity", Toast.LENGTH_LONG).show();
-
-//        tvDate.setValue("1398/06/01");
-        dataBinding.tvDate.setText("1398/06/01");
+       // Toast.makeText(this, "open ThirdPartyInqueryActivity", Toast.LENGTH_LONG).show();
+/*
+        viewModel.setTest("1398/06/01");
+        dataBinding.setViewModel(viewModel);*/
+   //  dataBinding.tvDate.setText("1398/06/01");
 //        Intent intent = MainActivity.newIntent(LoginActivity.this);
 //        startActivity(intent);
+    }
+
+
+    @Override
+    public void setData(List<BrandList> getBrandList) {
+        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+        ArrayList<String>strings= new ArrayList<>();
+
+        for (int i = 0; i < getBrandList.size(); i++) {
+            strings.add(getBrandList.get(i).getText());
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item,strings);
+        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+        dataBinding.setSpinnerAdapter1(arrayAdapter);
+
     }
 }

@@ -14,6 +14,9 @@
             type="ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel" />
 
         <variable
+            name="spinnerAdapter1"
+            type="android.widget.ArrayAdapter"/>
+        <variable
             name="spinnerAdapter"
             type="android.widget.ArrayAdapter"/>
     </data>
@@ -158,7 +161,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                app:adapter="@{spinnerAdapter}"
+                                app:adapter="@{spinnerAdapter1}"
                                 android:entries="@{viewModel.brandListEntries}"
                                 android:background="@null" />
 
@@ -224,7 +227,7 @@
                                 android:layout_marginRight="3dp"
                                 android:background="@null"
                                 android:clickable="true"
-                                android:text="@{viewModel.tvDate}"
+                                android:text="@{viewModel.test}"
                                 android:onClick="@{() -> viewModel.onDatePickerClick()}"
                                 android:drawableLeft="@drawable/ic_calendar_black_24dp"
                                 android:drawableTint="@color/menuColor" />
