@@ -40,6 +40,60 @@ public class Logger
     }
 
     @SuppressWarnings("unused")
+    public static void d(String tag, String msg)
+    {
+        if (ENABLE_LOGS)
+        {
+            Log.d(tag, msg);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static void d(String tag, String msg, Exception e)
+    {
+        if (ENABLE_LOGS)
+        {
+            Log.d(tag, msg, e);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static void d(String tag, String msg, OutOfMemoryError e)
+    {
+        if (ENABLE_LOGS)
+        {
+            Log.d(tag, msg, e);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static void e(String tag, String msg)
+    {
+        if (ENABLE_LOGS)
+        {
+            Log.e(tag, msg);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static void e(String tag, String msg, Exception e)
+    {
+        if (ENABLE_LOGS)
+        {
+            Log.e(tag, msg, e);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static void e(String tag, String msg, OutOfMemoryError e)
+    {
+        if (ENABLE_LOGS)
+        {
+            Log.e(tag, msg, e);
+        }
+    }
+
+    @SuppressWarnings("unused")
     public static boolean getIsLogsEnabled()
     {
         return ENABLE_LOGS;

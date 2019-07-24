@@ -14,10 +14,28 @@
             type="ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel" />
 
         <variable
-            name="spinnerAdapter1"
+            name="spinnerAdapterBrand"
             type="android.widget.ArrayAdapter"/>
         <variable
-            name="spinnerAdapter"
+            name="spinnerAdapterBrandModel"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterDamageStatus"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterFullNoDamageYear"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterFinancialDamageType"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterLifeDamageType"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterCompany"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterAvailableYears"
             type="android.widget.ArrayAdapter"/>
     </data>
 
@@ -118,7 +136,7 @@
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
-                                app:adapter="@{spinnerAdapter}"
+                                app:adapter="@{spinnerAdapterBrandModel}"
                                 android:layout_marginRight="3dp"
                                 android:background="@null" />
 
@@ -161,7 +179,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                app:adapter="@{spinnerAdapter1}"
+                                app:adapter="@{spinnerAdapterBrand}"
                                 android:entries="@{viewModel.brandListEntries}"
                                 android:background="@null" />
 
@@ -226,8 +244,10 @@
                                 android:layout_marginLeft="3dp"
                                 android:layout_marginRight="3dp"
                                 android:background="@null"
+                                android:textColor="@color/textColorPrimary"
+                                android:gravity="center"
                                 android:clickable="true"
-                                android:text="@{viewModel.test}"
+                                android:text="@{viewModel.tvDate}"
                                 android:onClick="@{() -> viewModel.onDatePickerClick()}"
                                 android:drawableLeft="@drawable/ic_calendar_black_24dp"
                                 android:drawableTint="@color/menuColor" />
@@ -266,7 +286,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                app:adapter="@{spinnerAdapter}"
+                                app:adapter="@{spinnerAdapterAvailableYears}"
                                 android:entries="@{viewModel.availableYearsEntries}"
                                 android:background="@null" />
 
@@ -340,7 +360,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                app:adapter="@{spinnerAdapter}"
+                                app:adapter="@{spinnerAdapterDamageStatus}"
                                 android:entries="@{viewModel.damageStatusListEntries}"
                                 android:background="@null" />
 
@@ -378,7 +398,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                app:adapter="@{spinnerAdapter}"
+                                app:adapter="@{spinnerAdapterFullNoDamageYear}"
                                 android:entries="@{viewModel.fullNoDamageYearListEntries}"
                                 android:background="@null" />
 
@@ -453,7 +473,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                app:adapter="@{spinnerAdapter}"
+                                app:adapter="@{spinnerAdapterLifeDamageType}"
                                 android:entries="@{viewModel.lifeDamageTypeListEntries}"
                                 android:background="@null" />
 
@@ -491,7 +511,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                app:adapter="@{spinnerAdapter}"
+                                app:adapter="@{spinnerAdapterFinancialDamageType}"
                                 android:entries="@{viewModel.financialDamageTypeListEntries}"
                                 android:background="@null" />
 
