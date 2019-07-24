@@ -1,6 +1,7 @@
 package ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.databinding.Bindable;
 import android.databinding.ObservableField;
 import android.util.Log;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 {
     @Getter @Setter
     private MutableLiveData<String> tvDate;
+//    public String tvDate;
 
     private List<BrandList> brandList = new ArrayList<>();
     private List<DamageStatusList> damageStatusList = new ArrayList<>();
@@ -120,7 +122,9 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     {
         Log.e("--VM--", "onDatePickerClick()");
         //for test
-        tvDate.setValue("1398/06/01");
+        tvDate.postValue("1398/06/02");
+        setTvDate(tvDate);
+//        tvDate = "1398/06/01";
     }
 
     @Override

@@ -34,6 +34,7 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item);
         arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
 
+        dataBinding.tvDate.setText(viewModel.getTvDate().getValue());
 //        dataBinding.setViewModel(viewModel);
         dataBinding.setSpinnerAdapter(arrayAdapter);
 
@@ -53,6 +54,9 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         dataBinding.spinnerFinancialDamageCount.setGravity(View.TEXT_ALIGNMENT_CENTER);
 
 //        viewModel.loadMainMenus();
+//        dataBinding.tvDate.setText(viewModel.getTvDate().getValue());
+//        dataBinding.tvDate.setText("1398/06/01");
+//        viewModel.getTvDate().
     }
 
     @Override
@@ -72,6 +76,8 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
     {
         Toast.makeText(this, "open ThirdPartyInqueryActivity", Toast.LENGTH_LONG).show();
 
+//        tvDate.setValue("1398/06/01");
+        dataBinding.tvDate.setText("1398/06/01");
 //        Intent intent = MainActivity.newIntent(LoginActivity.this);
 //        startActivity(intent);
     }

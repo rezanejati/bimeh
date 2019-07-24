@@ -8,6 +8,7 @@ import java.lang.ref.WeakReference;
 import io.reactivex.disposables.CompositeDisposable;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty.ThirdPartyActivity;
 
+//public abstract class BaseViewModel<N> extends ViewModel
 public abstract class BaseViewModel<N> extends ViewModel
 {
     private N mNavigator;
