@@ -20,12 +20,14 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FinancialDamageTypeList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FullNoDamageYearList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.LifeDamageTypeList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.view.adapter.SpinnerArrayAdapter;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.base.BaseActivity;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel;
 
-public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyNavigator,
-        ThirdPartySpinnerData
+public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyNavigator
 {
+    private ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,7 +35,17 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         super.onCreate(savedInstanceState);
         viewModel.setNavigator(this);
         initView();
-        viewModel.setSpinnerData(this);
+//        viewModel.setSpinnerData(this);
+
+
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item);
+        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+
+        dataBinding.spinnerBrand.setSelection(0);
+        dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
+        dataBinding.setSpinnerAdapterBrand(arrayAdapter);
+
+        subscribeToLiveData();
 
 //        dataBinding.tvDate.setOnClickListener(new View.OnClickListener()
 //        {
@@ -94,121 +106,25 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 //        startActivity(intent);
     }
 
-
-    @Override
-    public void setBrandData(List<BrandList> brandList)
+    private void subscribeToLiveData()
     {
-        ArrayList<String> list = new ArrayList<>();
-
-        list.add("--انتخاب کنید--");
-        for (BrandList item: brandList)
+        viewModel.getBrandListEntriesLive().observe(this, list ->
         {
-            list.add(item.getText());
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
-        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-        dataBinding.spinnerBrand.setSelection(0);
-        dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.setSpinnerAdapterBrand(arrayAdapter);
-    }
+//            dataBinding.spinnerBrand.setSelection(0);
+//            dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
+//            dataBinding.setSpinnerAdapterBrand(arrayAdapter);
 
-    @Override
-    public void setDamageStatusData(List<DamageStatusList> damageStatusList)
-    {
-        List<String> list = new ArrayList<>();
+            viewModel.setBrandListEntries(list);
+        });
 
-        list.add("--انتخاب کنید--");
-        for (DamageStatusList item : damageStatusList)
-        {
-            list.add(item.getText());
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
-        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-        dataBinding.spinnerDamageDiscount.setSelection(0);
-        dataBinding.spinnerDamageDiscount.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.setSpinnerAdapterDamageStatus(arrayAdapter);
-    }
+        viewModel.getDamageStatusListEntriesLive().observe(this, list -> viewModel.setDamageStatusListEntries(list));
 
-    @Override
-    public void setFullNoDamageYearData(List<FullNoDamageYearList> fullNoDamageYearList)
-    {
-        List<String> list = new ArrayList<>();
+        viewModel.getFinancialDamageTypeListEntriesLive().observe(this, list -> viewModel.setFinancialDamageTypeListEntries(list));
 
-        list.add("--انتخاب کنید--");
-        for (FullNoDamageYearList item : fullNoDamageYearList)
-        {
-            list.add(item.getText());
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
-        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-        dataBinding.spinnerDamageStatus.setSelection(0);
-        dataBinding.spinnerDamageStatus.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.setSpinnerAdapterFullNoDamageYear(arrayAdapter);
-    }
+        viewModel.getFullNoDamageYearListEntriesLive().observe(this, list -> viewModel.setFullNoDamageYearListEntries(list));
 
-    @Override
-    public void setFinancialDamageTypeData(List<FinancialDamageTypeList> financialDamageTypeList)
-    {
-        List<String> list = new ArrayList<>();
+        viewModel.getLifeDamageTypeListEntriesLive().observe(this, list -> viewModel.setLifeDamageTypeListEntries(list));
 
-        list.add("--انتخاب کنید--");
-        for (FinancialDamageTypeList item : financialDamageTypeList)
-        {
-            list.add(item.getText());
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
-        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-        dataBinding.spinnerFinancialDamageCount.setSelection(0);
-        dataBinding.spinnerFinancialDamageCount.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.setSpinnerAdapterFinancialDamageType(arrayAdapter);
-    }
-
-    @Override
-    public void setLifeDamageTypeData(List<LifeDamageTypeList> lifeDamageTypeList)
-    {
-        List<String> list = new ArrayList<>();
-
-        list.add("--انتخاب کنید--");
-        for (LifeDamageTypeList item : lifeDamageTypeList)
-        {
-            list.add(item.getText());
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
-        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-        dataBinding.spinnerDeathDamageCount.setSelection(0);
-        dataBinding.spinnerDeathDamageCount.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.setSpinnerAdapterLifeDamageType(arrayAdapter);
-    }
-
-//    @Override
-//    public void setCompanyData(List<CompanyList> companyList)
-//    {
-//        List<String> list = new ArrayList<>();
-
-//        list.add("--انتخاب کنید--");
-//        for (CompanyList item : companyList)
-//        {
-//            list.add(item.getText());
-//        }
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
-//        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-//        dataBinding.setSpinnerAdapterCompany(arrayAdapter);
-//    }
-
-    @Override
-    public void setAvailableYearData(List<AvailableYear> availableYears)
-    {
-        List<String> list = new ArrayList<>();
-
-        list.add("--انتخاب کنید--");
-        for (AvailableYear item : availableYears)
-        {
-            list.add(item.getText());
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
-        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-        dataBinding.spinnerCreateDate.setSelection(0);
-        dataBinding.spinnerCreateDate.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.setSpinnerAdapterAvailableYears(arrayAdapter);
+        viewModel.getAvailableYearsEntriesLive().observe(this, list -> viewModel.setAvailableYearsEntries(list));
     }
 }

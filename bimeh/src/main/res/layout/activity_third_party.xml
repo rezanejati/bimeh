@@ -13,6 +13,9 @@
             name="viewModel"
             type="ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel" />
 
+        <!--<variable-->
+            <!--name="spinnerAdapterBrand"-->
+            <!--type="ir.eniac.tech.bimeh.com.sdk.bimeh.view.adapter.SpinnerArrayAdapter"/>-->
         <variable
             name="spinnerAdapterBrand"
             type="android.widget.ArrayAdapter"/>
