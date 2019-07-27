@@ -17,6 +17,6 @@ public interface ThirdPartySpinnerData
     void setFullNoDamageYearData(List<FullNoDamageYearList> fullNoDamageYearList);
     void setFinancialDamageTypeData(List<FinancialDamageTypeList> financialDamageTypeList);
     void setLifeDamageTypeData(List<LifeDamageTypeList> lifeDamageTypeList);
-    void setCompanyData(List<CompanyList> companyList);
+//    void setCompanyData(List<CompanyList> companyList);
     void setAvailableYearData(List<AvailableYear> availableYears);
 }

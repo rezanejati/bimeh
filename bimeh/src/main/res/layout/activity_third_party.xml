@@ -117,7 +117,6 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
-                            android:layout_marginTop="4dp"
                             android:layout_marginRight="8dp"
                             android:background="@drawable/spinner_background">
 
@@ -159,7 +158,6 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
-                            android:layout_marginTop="4dp"
                             android:layout_marginRight="8dp"
                             android:background="@drawable/spinner_background">
 
@@ -220,6 +218,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:orientation="horizontal">
 
                     <RelativeLayout
@@ -232,14 +231,13 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
-                            android:layout_marginTop="4dp"
                             android:layout_marginRight="8dp"
                             android:background="@drawable/spinner_background">
 
                             <TextView
                                 android:id="@+id/tvDate"
                                 android:layout_width="match_parent"
-                                android:layout_height="30dp"
+                                android:layout_height="28dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="3dp"
                                 android:layout_marginRight="3dp"
@@ -266,7 +264,6 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
-                            android:layout_marginTop="4dp"
                             android:layout_marginRight="8dp"
                             android:background="@drawable/spinner_background">
 
@@ -328,45 +325,79 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3">
+                        android:layout_height="30dp"
+                        android:layout_weight="3"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/spinner_background">
 
-                        <RelativeLayout
+                        <ImageView
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="2dp"
+                            android:src="@drawable/ic_menu_down_24dp"
+                            android:tint="@color/menuColor" />
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/spinnerDamageDiscount"
+                            android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/spinner_background">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="2dp"
-                                android:src="@drawable/ic_menu_down_24dp"
-                                android:tint="@color/menuColor" />
-
-                            <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/spinnerDamageDiscount"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="3dp"
-                                app:adapter="@{spinnerAdapterDamageStatus}"
-                                android:entries="@{viewModel.damageStatusListEntries}"
-                                android:background="@null" />
-
-                        </RelativeLayout>
+                            android:layout_marginRight="3dp"
+                            app:adapter="@{spinnerAdapterDamageStatus}"
+                            android:entries="@{viewModel.damageStatusListEntries}"
+                            android:background="@null" />
 
                     </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="2"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/spinner_background">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="2dp"
+                            android:src="@drawable/ic_menu_down_24dp"
+                            android:tint="@color/menuColor" />
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/spinnerDamageStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="3dp"
+                            app:adapter="@{spinnerAdapterFullNoDamageYear}"
+                            android:entries="@{viewModel.fullNoDamageYearListEntries}"
+                            android:background="@null" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="0dp"
@@ -392,44 +423,26 @@
                                 android:tint="@color/menuColor" />
 
                             <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/spinnerDamageStatus"
+                                android:id="@+id/spinnerFinancialDamageCount"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                app:adapter="@{spinnerAdapterFullNoDamageYear}"
-                                android:entries="@{viewModel.fullNoDamageYearListEntries}"
+                                app:adapter="@{spinnerAdapterFinancialDamageType}"
+                                android:entries="@{viewModel.financialDamageTypeListEntries}"
                                 android:background="@null" />
 
                         </RelativeLayout>
 
                     </RelativeLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:orientation="horizontal">
-
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="8dp"
-                        android:layout_weight="3"
-                        android:gravity="right|bottom"
-                        android:text="تعداد خسارت جانی در سال گذشته"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/textColorTitle" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
                         android:layout_weight="2"
-                        android:gravity="right"
+                        android:gravity="right|center_vertical"
                         android:text="تعداد خسارت مالی در سال گذشته"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/textColorTitle" />
@@ -441,6 +454,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <RelativeLayout
@@ -481,43 +495,15 @@
 
                     </RelativeLayout>
 
-                    <RelativeLayout
+                    <TextView
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/spinner_background">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="2dp"
-                                android:src="@drawable/ic_menu_down_24dp"
-                                android:tint="@color/menuColor" />
-
-                            <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/spinnerFinancialDamageCount"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="3dp"
-                                app:adapter="@{spinnerAdapterFinancialDamageType}"
-                                android:entries="@{viewModel.financialDamageTypeListEntries}"
-                                android:background="@null" />
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="3"
+                        android:gravity="right|center_vertical"
+                        android:text="تعداد خسارت جانی در سال گذشته"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/textColorTitle" />
 
                 </LinearLayout>
 

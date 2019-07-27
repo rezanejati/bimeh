@@ -10,7 +10,7 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.SingletonService;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.listener.OnServiceStatus;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.AvailableYear;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.BrandList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.CompanyList;
+//import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.CompanyList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.DamageStatusList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FinancialDamageTypeList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FullNoDamageYearList;
@@ -28,8 +28,6 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     @Getter @Setter
     private ObservableField<String> tvDate = new ObservableField<>();
     //    public String tvDate;
-    @Getter @Setter
-    SpinnerData spinnerData1;
 
     @Getter @Setter
     private ThirdPartySpinnerData spinnerData;
@@ -39,7 +37,7 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     private List<FullNoDamageYearList> fullNoDamageYearList = new ArrayList<>();
     private List<FinancialDamageTypeList> financialDamageTypeList = new ArrayList<>();
     private List<LifeDamageTypeList> lifeDamageTypeList = new ArrayList<>();
-    private List<CompanyList> companyList = new ArrayList<>();
+//    private List<CompanyList> companyList = new ArrayList<>();
     private List<AvailableYear> availableYears = new ArrayList<>();
 
     @Getter @Setter
@@ -57,8 +55,8 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     @Getter @Setter
     private MutableLiveData<List<String>> lifeDamageTypeListEntries = new MutableLiveData<>();
 
-    @Getter @Setter
-    private MutableLiveData<List<String>> companyListEntries = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<List<String>> companyListEntries = new MutableLiveData<>();
 
     @Getter @Setter
     private MutableLiveData<List<String>> availableYearsEntries = new MutableLiveData<>();
@@ -73,8 +71,8 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     private MutableLiveData<Integer> financialDamageTypeListItemPosition = new MutableLiveData<>();
     @Getter @Setter
     private MutableLiveData<Integer> lifeDamageTypeListItemPosition = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<Integer> companyListItemPosition = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<Integer> companyListItemPosition = new MutableLiveData<>();
     @Getter @Setter
     private MutableLiveData<Integer> availableYearsItemPosition = new MutableLiveData<>();
 
@@ -88,8 +86,8 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     private MutableLiveData<String> financialDamageTypeListItemValue = new MutableLiveData<>();
     @Getter @Setter
     private MutableLiveData<String> lifeDamageTypeListItemValue = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<String> companyListItemValue = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<String> companyListItemValue = new MutableLiveData<>();
     @Getter @Setter
     private MutableLiveData<String> availableYearsItemValue = new MutableLiveData<>();
 
@@ -153,7 +151,7 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
         fullNoDamageYearList = thirdPartyFirstResponse.getFullNoDamageYearList();
         financialDamageTypeList = thirdPartyFirstResponse.getFinancialDamageTypeList();
         lifeDamageTypeList = thirdPartyFirstResponse.getLifeDamageTypeList();
-        companyList = thirdPartyFirstResponse.getCompanyList();
+//        companyList = thirdPartyFirstResponse.getCompanyList();
         availableYears = thirdPartyFirstResponse.getAvailableYears();
 
 //        spinnerData1.setData(brandList);
@@ -171,7 +169,7 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
         spinnerData.setFullNoDamageYearData(fullNoDamageYearList);
         spinnerData.setFinancialDamageTypeData(financialDamageTypeList);
         spinnerData.setLifeDamageTypeData(lifeDamageTypeList);
-        spinnerData.setCompanyData(companyList);
+//        spinnerData.setCompanyData(companyList);
         spinnerData.setAvailableYearData(availableYears);
 
 //
@@ -235,11 +233,6 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     {
         Logger.e("--onError--", "onError: " + message);
         //Show Error
-    }
-
-    public interface SpinnerData
-    {
-        void setData(List<BrandList> getBrandList);
     }
 
     public void updateTvDate(String date)

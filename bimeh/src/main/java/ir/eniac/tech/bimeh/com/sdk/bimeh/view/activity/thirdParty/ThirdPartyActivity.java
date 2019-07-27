@@ -33,7 +33,6 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         super.onCreate(savedInstanceState);
         viewModel.setNavigator(this);
         initView();
-//        viewModel.setSpinnerData1(this);
         viewModel.setSpinnerData(this);
 
 //        dataBinding.tvDate.setOnClickListener(new View.OnClickListener()
@@ -58,23 +57,12 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 
 
 //        dataBinding.tvDate.setText(viewModel.getTvDate().getValue());
-//        dataBinding.setViewModel(viewModel);
 
 
-        dataBinding.spinnerBrand.setSelection(0);
-        dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
         dataBinding.spinnerBrandModel.setSelection(0);
         dataBinding.spinnerBrandModel.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.spinnerCreateDate.setSelection(0);
-        dataBinding.spinnerCreateDate.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.spinnerDamageDiscount.setSelection(0);
-        dataBinding.spinnerDamageDiscount.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.spinnerDeathDamageCount.setSelection(0);
-        dataBinding.spinnerDeathDamageCount.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.spinnerDamageStatus.setSelection(0);
-        dataBinding.spinnerDamageStatus.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.spinnerFinancialDamageCount.setSelection(0);
-        dataBinding.spinnerFinancialDamageCount.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
 
 //        viewModel.loadMainMenus();
 //        dataBinding.tvDate.setText(viewModel.getTvDate().getValue());
@@ -107,33 +95,20 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
     }
 
 
-//    @Override
-//    public void setData(List<BrandList> getBrandList)
-//    {
-////        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-//        ArrayList<String> strings = new ArrayList<>();
-//
-//        for (int i = 0; i < getBrandList.size(); i++)
-//        {
-//            strings.add(getBrandList.get(i).getText());
-//        }
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, strings);
-//        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-////        dataBinding.setSpinnerAdapter1(arrayAdapter);
-//
-//    }
-
     @Override
     public void setBrandData(List<BrandList> brandList)
     {
         ArrayList<String> list = new ArrayList<>();
 
-        for (int i = 0; i < brandList.size(); i++)
+        list.add("--انتخاب کنید--");
+        for (BrandList item: brandList)
         {
-            list.add(brandList.get(i).getText());
+            list.add(item.getText());
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
         arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+        dataBinding.spinnerBrand.setSelection(0);
+        dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
         dataBinding.setSpinnerAdapterBrand(arrayAdapter);
     }
 
@@ -141,12 +116,16 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
     public void setDamageStatusData(List<DamageStatusList> damageStatusList)
     {
         List<String> list = new ArrayList<>();
+
+        list.add("--انتخاب کنید--");
         for (DamageStatusList item : damageStatusList)
         {
             list.add(item.getText());
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
         arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+        dataBinding.spinnerDamageDiscount.setSelection(0);
+        dataBinding.spinnerDamageDiscount.setGravity(View.TEXT_ALIGNMENT_CENTER);
         dataBinding.setSpinnerAdapterDamageStatus(arrayAdapter);
     }
 
@@ -154,12 +133,16 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
     public void setFullNoDamageYearData(List<FullNoDamageYearList> fullNoDamageYearList)
     {
         List<String> list = new ArrayList<>();
+
+        list.add("--انتخاب کنید--");
         for (FullNoDamageYearList item : fullNoDamageYearList)
         {
             list.add(item.getText());
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
         arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+        dataBinding.spinnerDamageStatus.setSelection(0);
+        dataBinding.spinnerDamageStatus.setGravity(View.TEXT_ALIGNMENT_CENTER);
         dataBinding.setSpinnerAdapterFullNoDamageYear(arrayAdapter);
     }
 
@@ -167,12 +150,16 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
     public void setFinancialDamageTypeData(List<FinancialDamageTypeList> financialDamageTypeList)
     {
         List<String> list = new ArrayList<>();
+
+        list.add("--انتخاب کنید--");
         for (FinancialDamageTypeList item : financialDamageTypeList)
         {
             list.add(item.getText());
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
         arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+        dataBinding.spinnerFinancialDamageCount.setSelection(0);
+        dataBinding.spinnerFinancialDamageCount.setGravity(View.TEXT_ALIGNMENT_CENTER);
         dataBinding.setSpinnerAdapterFinancialDamageType(arrayAdapter);
     }
 
@@ -180,38 +167,48 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
     public void setLifeDamageTypeData(List<LifeDamageTypeList> lifeDamageTypeList)
     {
         List<String> list = new ArrayList<>();
+
+        list.add("--انتخاب کنید--");
         for (LifeDamageTypeList item : lifeDamageTypeList)
         {
             list.add(item.getText());
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
         arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+        dataBinding.spinnerDeathDamageCount.setSelection(0);
+        dataBinding.spinnerDeathDamageCount.setGravity(View.TEXT_ALIGNMENT_CENTER);
         dataBinding.setSpinnerAdapterLifeDamageType(arrayAdapter);
     }
 
-    @Override
-    public void setCompanyData(List<CompanyList> companyList)
-    {
-        List<String> list = new ArrayList<>();
-        for (CompanyList item : companyList)
-        {
-            list.add(item.getText());
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
-        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-        dataBinding.setSpinnerAdapterCompany(arrayAdapter);
-    }
+//    @Override
+//    public void setCompanyData(List<CompanyList> companyList)
+//    {
+//        List<String> list = new ArrayList<>();
+
+//        list.add("--انتخاب کنید--");
+//        for (CompanyList item : companyList)
+//        {
+//            list.add(item.getText());
+//        }
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
+//        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+//        dataBinding.setSpinnerAdapterCompany(arrayAdapter);
+//    }
 
     @Override
     public void setAvailableYearData(List<AvailableYear> availableYears)
     {
         List<String> list = new ArrayList<>();
+
+        list.add("--انتخاب کنید--");
         for (AvailableYear item : availableYears)
         {
             list.add(item.getText());
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item, list);
         arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+        dataBinding.spinnerCreateDate.setSelection(0);
+        dataBinding.spinnerCreateDate.setGravity(View.TEXT_ALIGNMENT_CENTER);
         dataBinding.setSpinnerAdapterAvailableYears(arrayAdapter);
     }
 }
