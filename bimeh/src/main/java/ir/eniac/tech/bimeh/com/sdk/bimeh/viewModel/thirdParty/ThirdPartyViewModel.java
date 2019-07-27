@@ -1,7 +1,6 @@
 package ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
@@ -21,7 +20,6 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.response.ThirdPartyFirstResponse;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty.ThirdPartyNavigator;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty.ThirdPartySpinnerData;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.BaseViewModel;
 import lombok.Getter;
 import lombok.Setter;
