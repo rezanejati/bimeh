@@ -2,6 +2,7 @@ package ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
 
@@ -26,6 +27,12 @@ import lombok.Setter;
 
 public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> implements OnServiceStatus<ThirdPartyFirstResponse>
 {
+    @Getter
+    private ObservableBoolean isBrandModelLoading = new ObservableBoolean();
+
+    @Getter
+    private ObservableBoolean isLoading = new ObservableBoolean();
+
     @Getter @Setter
     private ObservableField<String> tvDate = new ObservableField<>();
     //    public String tvDate;
@@ -71,9 +78,6 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     private MutableLiveData<List<String>> availableYearsEntriesLive = new MutableLiveData<>();
 
 
-
-
-
 //    @Getter @Setter
 //    private MutableLiveData<Integer> brandListItemPosition = new MutableLiveData<>();
 //    @Getter @Setter
@@ -103,8 +107,20 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     public ThirdPartyViewModel()
     {
         super();
+        setIsLoading(true);
+        setIsBrandModelLoading(false);
 
         loadMainMenus();
+    }
+
+    public void setIsBrandModelLoading(boolean isLoading)
+    {
+        this.isBrandModelLoading.set(isLoading);
+    }
+
+    public void setIsLoading(boolean mIsLoading)
+    {
+        isLoading.set(mIsLoading);
     }
 
     public void setBrandListEntries(List<String> list)
@@ -145,6 +161,7 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 
     public void loadMainMenus()
     {
+        setIsLoading(true);
         SingletonService.getInstance().thirdPartyFirstService().setThirdPartyFirstAPIService(this);
     }
 
@@ -173,6 +190,8 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     @Override
     public void onReady(ThirdPartyFirstResponse thirdPartyFirstResponse)
     {
+        setIsLoading(false);
+
         Logger.e("--onReady--", thirdPartyFirstResponse.getResponseStatus().getValue());
         if (!thirdPartyFirstResponse.getResponseStatus().getValue().equals("200"))
         {
@@ -202,8 +221,14 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 //        spinnerData1.setData(brandList);
 
         loadData();
+    }
 
-
+    @Override
+    public void onError(String message)
+    {
+        setIsLoading(false);
+        Logger.e("--onError--", "onError: " + message);
+        //Show Error
     }
 
     private void loadData()
@@ -271,13 +296,6 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
         availableYearsEntriesLive.setValue(list);
         list.clear();
 
-    }
-
-    @Override
-    public void onError(String message)
-    {
-        Logger.e("--onError--", "onError: " + message);
-        //Show Error
     }
 
     public void updateTvDate(String date)

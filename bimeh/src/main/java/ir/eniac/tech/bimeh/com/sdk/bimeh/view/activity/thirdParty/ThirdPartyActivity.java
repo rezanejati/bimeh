@@ -66,7 +66,7 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 
     private void initView()
     {
-
+        dataBinding.rlLoading.setVisibility(View.VISIBLE);
 
 //        dataBinding.tvDate.setText(viewModel.getTvDate().getValue());
 
