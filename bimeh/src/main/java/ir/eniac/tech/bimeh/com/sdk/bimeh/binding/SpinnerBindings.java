@@ -16,26 +16,27 @@ public class SpinnerBindings
 //    }
 
 //    @BindingAdapter(value = "bind:onItemSelected")
-    public static void setSpinnerItemPos(Spinner spinner, View view, int position, long id)
-    {
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
+//    public static void setSpinnerItemPos(Spinner spinner, View view, int position, long id)
+//    {
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+//        {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+//            {
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent)
+//            {
+//
+//            }
+//        });
+//    }
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-
-            }
-        });
-    }
 //    @InverseBindingAdapter(attribute = "bind:onItemSelected")
-    public static String getSelectedValue(Spinner spinner)
-    {
-        return (String) spinner.getSelectedItem();
-    }
+//    public static String getSelectedValue(Spinner spinner)
+//    {
+//        return (String) spinner.getSelectedItem();
+//    }
 }
