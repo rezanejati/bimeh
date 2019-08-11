@@ -1,9 +1,9 @@
 package ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
-import android.util.Log;
-import android.widget.Toast;
+import android.databinding.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +12,13 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.SingletonService;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.listener.OnServiceStatus;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.AvailableYear;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.BrandList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.CompanyList;
+//import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.CompanyList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.DamageStatusList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FinancialDamageTypeList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FullNoDamageYearList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.LifeDamageTypeList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.response.ThirdPartyFirstResponse;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty.ThirdPartyNavigator;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.BaseViewModel;
 import lombok.Getter;
@@ -25,71 +26,123 @@ import lombok.Setter;
 
 public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> implements OnServiceStatus<ThirdPartyFirstResponse>
 {
+    @Getter @Setter
+    private ObservableField<String> tvDate = new ObservableField<>();
+    //    public String tvDate;
+
+//    @Getter @Setter
+//    private ThirdPartySpinnerData spinnerData;
+
     private List<BrandList> brandList = new ArrayList<>();
     private List<DamageStatusList> damageStatusList = new ArrayList<>();
     private List<FullNoDamageYearList> fullNoDamageYearList = new ArrayList<>();
     private List<FinancialDamageTypeList> financialDamageTypeList = new ArrayList<>();
     private List<LifeDamageTypeList> lifeDamageTypeList = new ArrayList<>();
-    private List<CompanyList> companyList = new ArrayList<>();
     private List<AvailableYear> availableYears = new ArrayList<>();
 
-    @Getter @Setter
-    private MutableLiveData<List<String>> brandListEntries = new MutableLiveData<>();
+    @Getter
+    private ObservableList<String> brandListEntries = new ObservableArrayList<>();
+    @Getter
+    private MutableLiveData<List<String>> brandListEntriesLive = new MutableLiveData<>();
 
-    @Getter @Setter
-    private MutableLiveData<List<String>> damageStatusListEntries = new MutableLiveData<>();
+    @Getter
+    private ObservableList<String> damageStatusListEntries = new ObservableArrayList<>();
+    @Getter
+    private MutableLiveData<List<String>> damageStatusListEntriesLive = new MutableLiveData<>();
 
-    @Getter @Setter
-    private MutableLiveData<List<String>> fullNoDamageYearListEntries = new MutableLiveData<>();
+    @Getter
+    private ObservableList<String> fullNoDamageYearListEntries = new ObservableArrayList<>();
+    @Getter
+    private MutableLiveData<List<String>> fullNoDamageYearListEntriesLive = new MutableLiveData<>();
 
-    @Getter @Setter
-    private MutableLiveData<List<String>> financialDamageTypeListEntries = new MutableLiveData<>();
+    @Getter
+    private ObservableList<String> financialDamageTypeListEntries = new ObservableArrayList<>();
+    @Getter
+    private MutableLiveData<List<String>> financialDamageTypeListEntriesLive = new MutableLiveData<>();
 
-    @Getter @Setter
-    private MutableLiveData<List<String>> lifeDamageTypeListEntries = new MutableLiveData<>();
+    @Getter
+    private ObservableList<String> lifeDamageTypeListEntries = new ObservableArrayList<>();
+    @Getter
+    private MutableLiveData<List<String>> lifeDamageTypeListEntriesLive = new MutableLiveData<>();
 
-    @Getter @Setter
-    private MutableLiveData<List<String>> companyListEntries = new MutableLiveData<>();
+    @Getter
+    private ObservableList<String> availableYearsEntries = new ObservableArrayList<>();
+    @Getter
+    private MutableLiveData<List<String>> availableYearsEntriesLive = new MutableLiveData<>();
 
-    @Getter @Setter
-    private MutableLiveData<List<String>> availableYearsEntries = new MutableLiveData<>();
 
-    @Getter @Setter
-    private MutableLiveData<Integer> brandListItemPosition = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<Integer> damageStatusListItemPosition = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<Integer> fullNoDamageYearListItemPosition = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<Integer> financialDamageTypeListItemPosition = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<Integer> lifeDamageTypeListItemPosition = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<Integer> companyListItemPosition = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<Integer> availableYearsItemPosition = new MutableLiveData<>();
 
-    @Getter @Setter
-    private MutableLiveData<String> brandListItemValue = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<String> damageStatusListItemValue = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<String> fullNoDamageYearListItemValue = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<String> financialDamageTypeListItemValue = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<String> lifeDamageTypeListItemValue = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<String> companyListItemValue = new MutableLiveData<>();
-    @Getter @Setter
-    private MutableLiveData<String> availableYearsItemValue = new MutableLiveData<>();
+
+
+//    @Getter @Setter
+//    private MutableLiveData<Integer> brandListItemPosition = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<Integer> damageStatusListItemPosition = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<Integer> fullNoDamageYearListItemPosition = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<Integer> financialDamageTypeListItemPosition = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<Integer> lifeDamageTypeListItemPosition = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<Integer> availableYearsItemPosition = new MutableLiveData<>();
+//
+//    @Getter @Setter
+//    private MutableLiveData<String> brandListItemValue = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<String> damageStatusListItemValue = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<String> fullNoDamageYearListItemValue = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<String> financialDamageTypeListItemValue = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<String> lifeDamageTypeListItemValue = new MutableLiveData<>();
+//    @Getter @Setter
+//    private MutableLiveData<String> availableYearsItemValue = new MutableLiveData<>();
 
     public ThirdPartyViewModel()
     {
         super();
+
         loadMainMenus();
     }
 
+    public void setBrandListEntries(List<String> list)
+    {
+        brandListEntries.clear();
+        brandListEntries.addAll(list);
+    }
+
+    public void setDamageStatusListEntries(List<String> list)
+    {
+        damageStatusListEntries.clear();
+        damageStatusListEntries.addAll(list);
+    }
+
+    public void setFullNoDamageYearListEntries(List<String> list)
+    {
+        fullNoDamageYearListEntries.clear();
+        fullNoDamageYearListEntries.addAll(list);
+    }
+
+    public void setFinancialDamageTypeListEntries(List<String> list)
+    {
+        financialDamageTypeListEntries.clear();
+        financialDamageTypeListEntries.addAll(list);
+    }
+
+    public void setLifeDamageTypeListEntries(List<String> list)
+    {
+        lifeDamageTypeListEntries.clear();
+        lifeDamageTypeListEntries.addAll(list);
+    }
+
+    public void setAvailableYearsEntries(List<String> list)
+    {
+        availableYearsEntries.clear();
+        availableYearsEntries.addAll(list);
+    }
+//
     public void loadMainMenus()
     {
         SingletonService.getInstance().thirdPartyFirstService().setThirdPartyFirstAPIService(this);
@@ -97,7 +150,7 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 
     public void OnClickInquery()
     {
-        Log.e("--VM onClick--", "OnClickInquery");
+        Logger.e("--VM onClick--", "OnClickInquery");
         getNavigator().openThirdPartyInqueryActivity();
     }
 
@@ -111,22 +164,27 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 
     }
 
+    public void onDatePickerClick()
+    {
+        String dateStr = "1398-05-02";
+        updateTvDate(dateStr);
+    }
+
     @Override
     public void onReady(ThirdPartyFirstResponse thirdPartyFirstResponse)
     {
-        Log.e("--onReady--", thirdPartyFirstResponse.getResponseStatus().getValue());
-        if (thirdPartyFirstResponse == null || !thirdPartyFirstResponse.getResponseStatus().getValue().equals("200"))
+        Logger.e("--onReady--", thirdPartyFirstResponse.getResponseStatus().getValue());
+        if (!thirdPartyFirstResponse.getResponseStatus().getValue().equals("200"))
         {
             String errorMessage = "";
             try
             {
-                for (String message: thirdPartyFirstResponse.getResponseStatus().getErrorList())
+                for (String message : thirdPartyFirstResponse.getResponseStatus().getErrorList())
                 {
                     errorMessage += message + "\n";
                 }
                 onError(errorMessage);
-            }
-            catch (NullPointerException e)
+            } catch (NullPointerException e)
             {
                 onError("خطای داخلی!");
             }
@@ -138,8 +196,10 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
         fullNoDamageYearList = thirdPartyFirstResponse.getFullNoDamageYearList();
         financialDamageTypeList = thirdPartyFirstResponse.getFinancialDamageTypeList();
         lifeDamageTypeList = thirdPartyFirstResponse.getLifeDamageTypeList();
-        companyList = thirdPartyFirstResponse.getCompanyList();
+//        companyList = thirdPartyFirstResponse.getCompanyList();
         availableYears = thirdPartyFirstResponse.getAvailableYears();
+
+//        spinnerData1.setData(brandList);
 
         loadData();
 
@@ -148,54 +208,67 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 
     private void loadData()
     {
+//        brandListEntriesLive.setValue(getBrandListEntries());
+
+//        spinnerData.setBrandData(brandList);
+//        spinnerData.setDamageStatusData(damageStatusList);
+//        spinnerData.setFullNoDamageYearData(fullNoDamageYearList);
+//        spinnerData.setFinancialDamageTypeData(financialDamageTypeList);
+//        spinnerData.setLifeDamageTypeData(lifeDamageTypeList);
+////        spinnerData.setCompanyData(companyList);
+//        spinnerData.setAvailableYearData(availableYears);
+
+//
+//
+//
+//
         List<String> list = new ArrayList<>();
-        for (BrandList item: brandList)
+        list.add("--انتخاب کنید--");
+        for (BrandList item : brandList)
         {
             list.add(item.getText());
         }
-        brandListEntries.setValue(list);
+        brandListEntriesLive.setValue(list);
         list.clear();
 
-        for (DamageStatusList item: damageStatusList)
+        list.add("--انتخاب کنید--");
+        for (DamageStatusList item : damageStatusList)
         {
             list.add(item.getText());
         }
-        damageStatusListEntries.setValue(list);
+        damageStatusListEntriesLive.setValue(list);
         list.clear();
 
-        for (FullNoDamageYearList item: fullNoDamageYearList)
+        list.add("--انتخاب کنید--");
+        for (FullNoDamageYearList item : fullNoDamageYearList)
         {
             list.add(item.getText());
         }
-        fullNoDamageYearListEntries.setValue(list);
+        fullNoDamageYearListEntriesLive.setValue(list);
         list.clear();
 
-        for (FinancialDamageTypeList item: financialDamageTypeList)
+        list.add("--انتخاب کنید--");
+        for (FinancialDamageTypeList item : financialDamageTypeList)
         {
             list.add(item.getText());
         }
-        financialDamageTypeListEntries.setValue(list);
+        financialDamageTypeListEntriesLive.setValue(list);
         list.clear();
 
-        for (LifeDamageTypeList item: lifeDamageTypeList)
+        list.add("--انتخاب کنید--");
+        for (LifeDamageTypeList item : lifeDamageTypeList)
         {
             list.add(item.getText());
         }
-        lifeDamageTypeListEntries.setValue(list);
+        lifeDamageTypeListEntriesLive.setValue(list);
         list.clear();
 
-        for (CompanyList item: companyList)
+        list.add("--انتخاب کنید--");
+        for (AvailableYear item : availableYears)
         {
             list.add(item.getText());
         }
-        companyListEntries.setValue(list);
-        list.clear();
-
-        for (AvailableYear item: availableYears)
-        {
-            list.add(item.getText());
-        }
-        availableYearsEntries.setValue(list);
+        availableYearsEntriesLive.setValue(list);
         list.clear();
 
     }
@@ -203,7 +276,13 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     @Override
     public void onError(String message)
     {
-        Log.e("--onError--", "onError: " + message);
+        Logger.e("--onError--", "onError: " + message);
         //Show Error
     }
+
+    public void updateTvDate(String date)
+    {
+        tvDate.set(date);
+    }
+
 }
