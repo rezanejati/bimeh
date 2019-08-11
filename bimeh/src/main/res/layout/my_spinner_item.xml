@@ -7,6 +7,6 @@
     android:id="@+id/content"
     android:padding="6dp"
     android:textColor="@color/textColorContent"
-    android:gravity="right|center_vertical"
+    android:gravity="center"
     android:textSize="12sp"
     android:drawableBottom="@color/textColorContent"/>
