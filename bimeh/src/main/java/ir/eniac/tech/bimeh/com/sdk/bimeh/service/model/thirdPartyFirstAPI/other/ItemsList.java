@@ -4,7 +4,7 @@ package ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AvailableYear
+public class ItemsList
 {
 
     @SerializedName("Value")
