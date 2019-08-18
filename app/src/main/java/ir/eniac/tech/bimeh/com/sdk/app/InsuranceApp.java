@@ -6,7 +6,7 @@ import android.util.Log;
 import dagger.android.HasActivityInjector;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.EniacApplication;
 
-public class BimehApp extends EniacApplication
+public class InsuranceApp extends EniacApplication
 //        implements HasActivityInjector
 {
 
@@ -18,7 +18,7 @@ public class BimehApp extends EniacApplication
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.e("testt", "onCreate: ");
+//        Log.e("testt", "onCreate: ");
 
 
     }

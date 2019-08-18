@@ -10,13 +10,8 @@ import java.util.List;
 
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.SingletonService;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.listener.OnServiceStatus;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.AvailableYear;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.BrandList;
 //import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.CompanyList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.DamageStatusList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FinancialDamageTypeList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FullNoDamageYearList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.LifeDamageTypeList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.ItemsList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.response.ThirdPartyFirstResponse;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty.ThirdPartyNavigator;
@@ -33,42 +28,45 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 //    @Getter @Setter
 //    private ThirdPartySpinnerData spinnerData;
 
-    private List<BrandList> brandList = new ArrayList<>();
-    private List<DamageStatusList> damageStatusList = new ArrayList<>();
-    private List<FullNoDamageYearList> fullNoDamageYearList = new ArrayList<>();
-    private List<FinancialDamageTypeList> financialDamageTypeList = new ArrayList<>();
-    private List<LifeDamageTypeList> lifeDamageTypeList = new ArrayList<>();
-    private List<AvailableYear> availableYears = new ArrayList<>();
+    @Getter
+    private ObservableField<Boolean> progressBrandModelVisible = new ObservableField<>();
+
+    private List<ItemsList> brandList = new ArrayList<>();
+    private List<ItemsList> damageStatusList = new ArrayList<>();
+    private List<ItemsList> fullNoDamageYearList = new ArrayList<>();
+    private List<ItemsList> financialDamageTypeList = new ArrayList<>();
+    private List<ItemsList> lifeDamageTypeList = new ArrayList<>();
+    private List<ItemsList> availableYears = new ArrayList<>();
 
     @Getter
-    private ObservableList<String> brandListEntries = new ObservableArrayList<>();
+    private ObservableList<ItemsList> brandListEntries = new ObservableArrayList<>();
     @Getter
-    private MutableLiveData<List<String>> brandListEntriesLive = new MutableLiveData<>();
+    private MutableLiveData<List<ItemsList>> brandListEntriesLive = new MutableLiveData<>();
 
     @Getter
-    private ObservableList<String> damageStatusListEntries = new ObservableArrayList<>();
+    private ObservableList<ItemsList> damageStatusListEntries = new ObservableArrayList<>();
     @Getter
-    private MutableLiveData<List<String>> damageStatusListEntriesLive = new MutableLiveData<>();
+    private MutableLiveData<List<ItemsList>> damageStatusListEntriesLive = new MutableLiveData<>();
 
     @Getter
-    private ObservableList<String> fullNoDamageYearListEntries = new ObservableArrayList<>();
+    private ObservableList<ItemsList> fullNoDamageYearListEntries = new ObservableArrayList<>();
     @Getter
-    private MutableLiveData<List<String>> fullNoDamageYearListEntriesLive = new MutableLiveData<>();
+    private MutableLiveData<List<ItemsList>> fullNoDamageYearListEntriesLive = new MutableLiveData<>();
 
     @Getter
-    private ObservableList<String> financialDamageTypeListEntries = new ObservableArrayList<>();
+    private ObservableList<ItemsList> financialDamageTypeListEntries = new ObservableArrayList<>();
     @Getter
-    private MutableLiveData<List<String>> financialDamageTypeListEntriesLive = new MutableLiveData<>();
+    private MutableLiveData<List<ItemsList>> financialDamageTypeListEntriesLive = new MutableLiveData<>();
 
     @Getter
-    private ObservableList<String> lifeDamageTypeListEntries = new ObservableArrayList<>();
+    private ObservableList<ItemsList> lifeDamageTypeListEntries = new ObservableArrayList<>();
     @Getter
-    private MutableLiveData<List<String>> lifeDamageTypeListEntriesLive = new MutableLiveData<>();
+    private MutableLiveData<List<ItemsList>> lifeDamageTypeListEntriesLive = new MutableLiveData<>();
 
     @Getter
-    private ObservableList<String> availableYearsEntries = new ObservableArrayList<>();
+    private ObservableList<ItemsList> availableYearsEntries = new ObservableArrayList<>();
     @Getter
-    private MutableLiveData<List<String>> availableYearsEntriesLive = new MutableLiveData<>();
+    private MutableLiveData<List<ItemsList>> availableYearsEntriesLive = new MutableLiveData<>();
 
 
 
@@ -104,45 +102,52 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     {
         super();
 
+        setProgressBrandModelVisible(false);
+
         loadMainMenus();
     }
 
-    public void setBrandListEntries(List<String> list)
+    public void setProgressBrandModelVisible(Boolean isVisible)
+    {
+        progressBrandModelVisible.set(isVisible);
+    }
+
+    public void setBrandListEntries(List<ItemsList> list)
     {
         brandListEntries.clear();
         brandListEntries.addAll(list);
     }
 
-    public void setDamageStatusListEntries(List<String> list)
+    public void setDamageStatusListEntries(List<ItemsList> list)
     {
         damageStatusListEntries.clear();
         damageStatusListEntries.addAll(list);
     }
 
-    public void setFullNoDamageYearListEntries(List<String> list)
+    public void setFullNoDamageYearListEntries(List<ItemsList> list)
     {
         fullNoDamageYearListEntries.clear();
         fullNoDamageYearListEntries.addAll(list);
     }
 
-    public void setFinancialDamageTypeListEntries(List<String> list)
+    public void setFinancialDamageTypeListEntries(List<ItemsList> list)
     {
         financialDamageTypeListEntries.clear();
         financialDamageTypeListEntries.addAll(list);
     }
 
-    public void setLifeDamageTypeListEntries(List<String> list)
+    public void setLifeDamageTypeListEntries(List<ItemsList> list)
     {
         lifeDamageTypeListEntries.clear();
         lifeDamageTypeListEntries.addAll(list);
     }
 
-    public void setAvailableYearsEntries(List<String> list)
+    public void setAvailableYearsEntries(List<ItemsList> list)
     {
         availableYearsEntries.clear();
         availableYearsEntries.addAll(list);
     }
-//
+
     public void loadMainMenus()
     {
         SingletonService.getInstance().thirdPartyFirstService().setThirdPartyFirstAPIService(this);
@@ -191,85 +196,43 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
             return;
         }
 
-        brandList = thirdPartyFirstResponse.getBrandList();
-        damageStatusList = thirdPartyFirstResponse.getDamageStatusList();
-        fullNoDamageYearList = thirdPartyFirstResponse.getFullNoDamageYearList();
-        financialDamageTypeList = thirdPartyFirstResponse.getFinancialDamageTypeList();
-        lifeDamageTypeList = thirdPartyFirstResponse.getLifeDamageTypeList();
-//        companyList = thirdPartyFirstResponse.getCompanyList();
-        availableYears = thirdPartyFirstResponse.getAvailableYears();
-
-//        spinnerData1.setData(brandList);
-
-        loadData();
+        loadData(thirdPartyFirstResponse);
 
 
     }
 
-    private void loadData()
+    private void loadData(ThirdPartyFirstResponse thirdPartyFirstResponse)
     {
-//        brandListEntriesLive.setValue(getBrandListEntries());
 
-//        spinnerData.setBrandData(brandList);
-//        spinnerData.setDamageStatusData(damageStatusList);
-//        spinnerData.setFullNoDamageYearData(fullNoDamageYearList);
-//        spinnerData.setFinancialDamageTypeData(financialDamageTypeList);
-//        spinnerData.setLifeDamageTypeData(lifeDamageTypeList);
-////        spinnerData.setCompanyData(companyList);
-//        spinnerData.setAvailableYearData(availableYears);
+        ItemsList items = new ItemsList();
+        items.setValue("0");
+        items.setText("--انتخاب کنید--");
 
-//
-//
-//
-//
-        List<String> list = new ArrayList<>();
-        list.add("--انتخاب کنید--");
-        for (BrandList item : brandList)
-        {
-            list.add(item.getText());
-        }
-        brandListEntriesLive.setValue(list);
-        list.clear();
+        brandList.add(items);
+        brandList.addAll(thirdPartyFirstResponse.getBrandList());
+        brandListEntriesLive.setValue(brandList);
 
-        list.add("--انتخاب کنید--");
-        for (DamageStatusList item : damageStatusList)
-        {
-            list.add(item.getText());
-        }
-        damageStatusListEntriesLive.setValue(list);
-        list.clear();
+        damageStatusList.add(items);
+        damageStatusList.addAll(thirdPartyFirstResponse.getDamageStatusList());
+        damageStatusListEntriesLive.setValue(damageStatusList);
 
-        list.add("--انتخاب کنید--");
-        for (FullNoDamageYearList item : fullNoDamageYearList)
-        {
-            list.add(item.getText());
-        }
-        fullNoDamageYearListEntriesLive.setValue(list);
-        list.clear();
+        fullNoDamageYearList.add(items);
+        fullNoDamageYearList.addAll(thirdPartyFirstResponse.getFullNoDamageYearList());
+        fullNoDamageYearListEntriesLive.setValue(fullNoDamageYearList);
 
-        list.add("--انتخاب کنید--");
-        for (FinancialDamageTypeList item : financialDamageTypeList)
-        {
-            list.add(item.getText());
-        }
-        financialDamageTypeListEntriesLive.setValue(list);
-        list.clear();
+        financialDamageTypeList.add(items);
+        financialDamageTypeList.addAll(thirdPartyFirstResponse.getFinancialDamageTypeList());
+        financialDamageTypeListEntriesLive.setValue(financialDamageTypeList);
 
-        list.add("--انتخاب کنید--");
-        for (LifeDamageTypeList item : lifeDamageTypeList)
-        {
-            list.add(item.getText());
-        }
-        lifeDamageTypeListEntriesLive.setValue(list);
-        list.clear();
+        lifeDamageTypeList.add(items);
+        lifeDamageTypeList.addAll(thirdPartyFirstResponse.getLifeDamageTypeList());
+        lifeDamageTypeListEntriesLive.setValue(lifeDamageTypeList);
 
-        list.add("--انتخاب کنید--");
-        for (AvailableYear item : availableYears)
-        {
-            list.add(item.getText());
-        }
-        availableYearsEntriesLive.setValue(list);
-        list.clear();
+        availableYears.add(items);
+        availableYears.addAll(thirdPartyFirstResponse.getAvailableYears());
+        availableYearsEntriesLive.setValue(availableYears);
+
+//        companyList = thirdPartyFirstResponse.getCompanyList();
 
     }
 
