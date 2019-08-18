@@ -13,8 +13,32 @@
             name="viewModel"
             type="ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel" />
 
+        <!--<variable-->
+        <!--name="spinnerAdapterBrand"-->
+        <!--type="ir.eniac.tech.bimeh.com.sdk.bimeh.view.adapter.SpinnerArrayAdapter"/>-->
+        <variable
+            name="spinnerAdapterBrand"
+            type="android.widget.ArrayAdapter"/>
         <variable
             name="spinnerAdapterBrandModel"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterDamageStatus"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterFullNoDamageYear"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterFinancialDamageType"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterLifeDamageType"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterCompany"
+            type="android.widget.ArrayAdapter"/>
+        <variable
+            name="spinnerAdapterAvailableYears"
             type="android.widget.ArrayAdapter"/>
     </data>
 
@@ -97,7 +121,6 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
-                            app:activate="@{viewModel.progressBrandModelVisible}"
                             android:background="@drawable/spinner_background">
 
                             <ImageView
@@ -122,7 +145,6 @@
                             <ProgressBar
                                 android:id="@+id/progressBrandModel"
                                 android:layout_width="match_parent"
-                                bind:visibile="@{viewModel.progressBrandModelVisible}"
                                 android:layout_height="30dp" />
 
                         </RelativeLayout>
@@ -158,7 +180,8 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                bind:my_adapter="@{viewModel.brandListEntries}"
+                                app:adapter="@{spinnerAdapterBrand}"
+                                android:entries="@{viewModel.brandListEntries}"
                                 android:background="@null" />
 
                         </RelativeLayout>
@@ -263,7 +286,8 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                bind:my_adapter="@{viewModel.availableYearsEntries}"
+                                app:adapter="@{spinnerAdapterAvailableYears}"
+                                android:entries="@{viewModel.availableYearsEntries}"
                                 android:background="@null" />
 
                         </RelativeLayout>
@@ -332,7 +356,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
-                            bind:my_adapter="@{viewModel.damageStatusListEntries}"
+                            app:adapter="@{spinnerAdapterDamageStatus}"
+                            android:entries="@{viewModel.damageStatusListEntries}"
                             android:background="@null" />
 
                     </RelativeLayout>
@@ -362,7 +387,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
-                            bind:my_adapter="@{viewModel.fullNoDamageYearListEntries}"
+                            app:adapter="@{spinnerAdapterFullNoDamageYear}"
+                            android:entries="@{viewModel.fullNoDamageYearListEntries}"
                             android:background="@null" />
 
                     </RelativeLayout>
@@ -379,7 +405,7 @@
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3">
+                        android:layout_weight="2">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -406,7 +432,8 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                bind:my_adapter="@{viewModel.financialDamageTypeListEntries}"
+                                app:adapter="@{spinnerAdapterFinancialDamageType}"
+                                android:entries="@{viewModel.financialDamageTypeListEntries}"
                                 android:background="@null" />
 
                         </RelativeLayout>
@@ -417,7 +444,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="8dp"
-                        android:layout_weight="4"
+                        android:layout_weight="2"
                         android:gravity="right|center_vertical"
                         android:text="تعداد خسارت مالی در سال گذشته"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -463,7 +490,8 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                bind:my_adapter="@{viewModel.lifeDamageTypeListEntries}"
+                                app:adapter="@{spinnerAdapterLifeDamageType}"
+                                android:entries="@{viewModel.lifeDamageTypeListEntries}"
                                 android:background="@null" />
 
                         </RelativeLayout>
@@ -474,7 +502,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="8dp"
-                        android:layout_weight="4"
+                        android:layout_weight="3"
                         android:gravity="right|center_vertical"
                         android:text="تعداد خسارت جانی در سال گذشته"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"

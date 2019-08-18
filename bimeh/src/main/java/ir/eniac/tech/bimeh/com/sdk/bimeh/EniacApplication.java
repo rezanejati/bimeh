@@ -51,7 +51,7 @@ public class EniacApplication extends Application
         SingletonService.getInstance().setContext(this);
 
         mNetComponent = DaggerNetComponent.builder()
-//                .appModule(new AppModule(this))
+                .appModule(new AppModule(this))
                 .netModule(new NetModule(Const.BASEURL))
                 .build();
 
