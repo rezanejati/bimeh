@@ -11,8 +11,7 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.EniacApplication;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.di.module.ViewModelModule;
 
 @Singleton
-//@Component(modules = {ViewModelModule.class, AndroidInjectionModule.class})
-@Component(modules = {ViewModelModule.class})
+@Component(modules = {ViewModelModule.class, AndroidInjectionModule.class})
 public interface ViewModelComponent
 {
 

@@ -6,18 +6,24 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.ItemsList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.AvailableYear;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.BrandList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.CompanyList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.DamageStatusList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FinancialDamageTypeList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FullNoDamageYearList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.LifeDamageTypeList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.ResponseStatus;
 
 public class ThirdPartyFirstResponse
 {
-    public ThirdPartyFirstResponse(List<ItemsList> brandList,
-                                   List<ItemsList> damageStatusList,
-                                   List<ItemsList> fullNoDamageYearList,
-                                   List<ItemsList> financialDamageTypeList,
-                                   List<ItemsList> lifeDamageTypeList,
-                                   List<ItemsList> companyList,
-                                   List<ItemsList> availableYears,
+    public ThirdPartyFirstResponse(List<BrandList> brandList,
+                                   List<DamageStatusList> damageStatusList,
+                                   List<FullNoDamageYearList> fullNoDamageYearList,
+                                   List<FinancialDamageTypeList> financialDamageTypeList,
+                                   List<LifeDamageTypeList> lifeDamageTypeList,
+                                   List<CompanyList> companyList,
+                                   List<AvailableYear> availableYears,
                                    ResponseStatus responseStatus)
     {
         this.brandList = brandList;
@@ -32,95 +38,95 @@ public class ThirdPartyFirstResponse
 
     @SerializedName("BrandList")
     @Expose
-    private List<ItemsList> brandList = null;
+    private List<BrandList> brandList = null;
     @SerializedName("DamageStatusList")
     @Expose
-    private List<ItemsList> damageStatusList = null;
+    private List<DamageStatusList> damageStatusList = null;
     @SerializedName("FullNoDamageYearList")
     @Expose
-    private List<ItemsList> fullNoDamageYearList = null;
+    private List<FullNoDamageYearList> fullNoDamageYearList = null;
     @SerializedName("FinancialDamageTypeList")
     @Expose
-    private List<ItemsList> financialDamageTypeList = null;
+    private List<FinancialDamageTypeList> financialDamageTypeList = null;
     @SerializedName("LifeDamageTypeList")
     @Expose
-    private List<ItemsList> lifeDamageTypeList = null;
+    private List<LifeDamageTypeList> lifeDamageTypeList = null;
     @SerializedName("CompanyList")
     @Expose
-    private List<ItemsList> companyList = null;
+    private List<CompanyList> companyList = null;
     @SerializedName("AvailableYears")
     @Expose
-    private List<ItemsList> availableYears = null;
+    private List<AvailableYear> availableYears = null;
     @SerializedName("ResponseStatus")
     @Expose
     private ResponseStatus responseStatus;
 
-    public List<ItemsList> getBrandList()
+    public List<BrandList> getBrandList()
     {
         return brandList;
     }
 
-    public void setBrandList(List<ItemsList> brandList)
+    public void setBrandList(List<BrandList> brandList)
     {
         this.brandList = brandList;
     }
 
-    public List<ItemsList> getDamageStatusList()
+    public List<DamageStatusList> getDamageStatusList()
     {
         return damageStatusList;
     }
 
-    public void setDamageStatusList(List<ItemsList> damageStatusList)
+    public void setDamageStatusList(List<DamageStatusList> damageStatusList)
     {
         this.damageStatusList = damageStatusList;
     }
 
-    public List<ItemsList> getFullNoDamageYearList()
+    public List<FullNoDamageYearList> getFullNoDamageYearList()
     {
         return fullNoDamageYearList;
     }
 
-    public void setFullNoDamageYearList(List<ItemsList> fullNoDamageYearList)
+    public void setFullNoDamageYearList(List<FullNoDamageYearList> fullNoDamageYearList)
     {
         this.fullNoDamageYearList = fullNoDamageYearList;
     }
 
-    public List<ItemsList> getFinancialDamageTypeList()
+    public List<FinancialDamageTypeList> getFinancialDamageTypeList()
     {
         return financialDamageTypeList;
     }
 
-    public void setFinancialDamageTypeList(List<ItemsList> financialDamageTypeList)
+    public void setFinancialDamageTypeList(List<FinancialDamageTypeList> financialDamageTypeList)
     {
         this.financialDamageTypeList = financialDamageTypeList;
     }
 
-    public List<ItemsList> getLifeDamageTypeList()
+    public List<LifeDamageTypeList> getLifeDamageTypeList()
     {
         return lifeDamageTypeList;
     }
 
-    public void setLifeDamageTypeList(List<ItemsList> lifeDamageTypeList)
+    public void setLifeDamageTypeList(List<LifeDamageTypeList> lifeDamageTypeList)
     {
         this.lifeDamageTypeList = lifeDamageTypeList;
     }
 
-    public List<ItemsList> getCompanyList()
+    public List<CompanyList> getCompanyList()
     {
         return companyList;
     }
 
-    public void setCompanyList(List<ItemsList> companyList)
+    public void setCompanyList(List<CompanyList> companyList)
     {
         this.companyList = companyList;
     }
 
-    public List<ItemsList> getAvailableYears()
+    public List<AvailableYear> getAvailableYears()
     {
         return availableYears;
     }
 
-    public void setAvailableYears(List<ItemsList> availableYears)
+    public void setAvailableYears(List<AvailableYear> availableYears)
     {
         this.availableYears = availableYears;
     }

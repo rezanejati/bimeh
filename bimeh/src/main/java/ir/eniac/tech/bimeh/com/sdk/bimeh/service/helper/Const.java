@@ -12,7 +12,7 @@ public class Const
 
     public static Boolean TEST = false;
 
-    public final static String BASEURL = "https://restcore.bimeh.com/";
+    public final static String BASEURL = "http://restcore.bimeh.com/";
 //    public final static String BASEURL = "http://192.168.20.242:1031/MainService.svc/";
 
     public final static String ThirdPartyFirstAPI = "ThirdParty/FirstRequest";
