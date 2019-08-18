@@ -13,15 +13,6 @@ import java.util.List;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.BR;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.R;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.databinding.ActivityThirdPartyBinding;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.AvailableYear;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.BrandList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.CompanyList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.DamageStatusList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FinancialDamageTypeList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.FullNoDamageYearList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.LifeDamageTypeList;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.view.adapter.SpinnerArrayAdapter;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.base.BaseActivity;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel;
 
@@ -38,12 +29,12 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 //        viewModel.setSpinnerData(this);
 
 
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item);
-        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-
-        dataBinding.spinnerBrand.setSelection(0);
-        dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        dataBinding.setSpinnerAdapterBrand(arrayAdapter);
+//        arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item);
+//        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
+//
+//        dataBinding.spinnerBrand.setSelection(0);
+//        dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
+//        dataBinding.setSpinnerAdapterBrand(arrayAdapter);
 
         subscribeToLiveData();
 
