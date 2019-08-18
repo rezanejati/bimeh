@@ -20,7 +20,7 @@ public class ThirdPartyBrandModelListService extends BasePart
     }
 
 //    @Mock(jsonName = "cancellation_policies", response = ThirdPartyFirstResponse.class)
-    public void setThirdPartyBrandModelListService(int brandId, OnServiceStatus<ThirdPartyBrandModelListResponse> listener)
+    public void setThirdPartyBrandModelListService(String brandId, OnServiceStatus<ThirdPartyBrandModelListResponse> listener)
     {
         start(getServiceGenerator().createService().GetBrandModelList(brandId), listener);
     }

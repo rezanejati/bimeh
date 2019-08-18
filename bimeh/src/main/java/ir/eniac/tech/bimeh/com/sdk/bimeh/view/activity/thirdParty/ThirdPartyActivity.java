@@ -1,31 +1,34 @@
 package ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty;
 
-import android.arch.lifecycle.Observer;
+//import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.preference.DialogPreference;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import ir.eniac.tech.bimeh.com.sdk.bimeh.BR;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.R;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.databinding.ActivityThirdPartyBinding;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.base.BaseActivity;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel;
+import library.android.calendar.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
+import library.android.calendar.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
-public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyNavigator
+public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyNavigator,
+        DatePickerDialog.OnDateSetListener
 {
-    private ArrayAdapter<String> arrayAdapter;
+    private DatePickerDialog datePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         viewModel.setNavigator(this);
+
         initView();
+
+        initDate();
 //        viewModel.setSpinnerData(this);
 
 
@@ -47,6 +50,20 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 //                viewModel.updateTvDate(dateStr);
 //            }
 //        });
+    }
+
+    private void initDate()
+    {
+        PersianCalendar calendar = new PersianCalendar();
+
+        datePickerDialog = DatePickerDialog.newInstance(this,
+                calendar.getPersianYear(),
+                calendar.getPersianMonth(),
+                calendar.getPersianDay()
+        );
+
+        datePickerDialog.setMinDate(calendar);
+
     }
 
     @Override
@@ -97,16 +114,24 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 //        startActivity(intent);
     }
 
+    @Override
+    public void openDatePicker()
+    {
+
+        if (datePickerDialog.isAdded())
+        {
+            return;
+        }
+
+        datePickerDialog.setTitle("");
+        datePickerDialog.show(getSupportFragmentManager(), "DatePickerDialog");
+    }
+
     private void subscribeToLiveData()
     {
-        viewModel.getBrandListEntriesLive().observe(this, list ->
-        {
-//            dataBinding.spinnerBrand.setSelection(0);
-//            dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
-//            dataBinding.setSpinnerAdapterBrand(arrayAdapter);
+        viewModel.getBrandListEntriesLive().observe(this, viewModel::setBrandListEntries);
 
-            viewModel.setBrandListEntries(list);
-        });
+        viewModel.getBrandModelListEntriesLive().observe(this, list -> viewModel.setBrandModelListEntries(list));
 
         viewModel.getDamageStatusListEntriesLive().observe(this, list -> viewModel.setDamageStatusListEntries(list));
 
@@ -117,5 +142,16 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         viewModel.getLifeDamageTypeListEntriesLive().observe(this, list -> viewModel.setLifeDamageTypeListEntries(list));
 
         viewModel.getAvailableYearsEntriesLive().observe(this, list -> viewModel.setAvailableYearsEntries(list));
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int endYear, int endMonth, int endDay)
+    {
+        PersianCalendar calendar = new PersianCalendar();
+        calendar.set(year, monthOfYear, dayOfMonth);
+        datePickerDialog.setPersianCalendar(calendar);
+
+        String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+        viewModel.updateTvDate(date);
     }
 }

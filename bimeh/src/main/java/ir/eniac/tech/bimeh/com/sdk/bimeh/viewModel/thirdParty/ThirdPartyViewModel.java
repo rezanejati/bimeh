@@ -4,6 +4,10 @@ import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
+import android.support.v7.widget.AppCompatSpinner;
+import android.widget.Spinner;
+
+import com.android.databinding.library.baseAdapters.BR;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +15,8 @@ import java.util.List;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.SingletonService;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.listener.OnServiceStatus;
 //import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.CompanyList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyBrandModelList.others.CarModelList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyBrandModelList.response.ThirdPartyBrandModelListResponse;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.ItemsList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.response.ThirdPartyFirstResponse;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
@@ -19,19 +25,23 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.BaseViewModel;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> implements OnServiceStatus<ThirdPartyFirstResponse>
+import static ir.eniac.tech.bimeh.com.sdk.bimeh.BR.spinnerAdapterBrandModel;
+import static ir.eniac.tech.bimeh.com.sdk.bimeh.BR.viewModel;
+
+public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> implements OnServiceStatus<ThirdPartyFirstResponse>,
+        SpinnerBrandChangeListener
 {
     @Getter @Setter
     private ObservableField<String> tvDate = new ObservableField<>();
     //    public String tvDate;
 
-//    @Getter @Setter
-//    private ThirdPartySpinnerData spinnerData;
-
     @Getter
     private ObservableField<Boolean> progressBrandModelVisible = new ObservableField<>();
+    @Getter
+    private ObservableField<Boolean> spnBrandModelActivate = new ObservableField<>();
 
     private List<ItemsList> brandList = new ArrayList<>();
+    private List<CarModelList> brandModelList = new ArrayList<>();
     private List<ItemsList> damageStatusList = new ArrayList<>();
     private List<ItemsList> fullNoDamageYearList = new ArrayList<>();
     private List<ItemsList> financialDamageTypeList = new ArrayList<>();
@@ -42,6 +52,11 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     private ObservableList<ItemsList> brandListEntries = new ObservableArrayList<>();
     @Getter
     private MutableLiveData<List<ItemsList>> brandListEntriesLive = new MutableLiveData<>();
+
+    @Getter
+    private ObservableList<CarModelList> brandModelListEntries = new ObservableArrayList<>();
+    @Getter
+    private MutableLiveData<List<CarModelList>> brandModelListEntriesLive = new MutableLiveData<>();
 
     @Getter
     private ObservableList<ItemsList> damageStatusListEntries = new ObservableArrayList<>();
@@ -69,22 +84,30 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     private MutableLiveData<List<ItemsList>> availableYearsEntriesLive = new MutableLiveData<>();
 
 
+    @Getter @Setter
+    private ObservableField<Integer> brandListItemPosition = new ObservableField<>();
+
+    @Getter
+    private ObservableField<Integer> brandModelListItemPosition = new ObservableField<>();
+
+    @Getter
+    private ObservableField<Integer> damageStatusListItemPosition = new ObservableField<>();
+
+    @Getter
+    private ObservableField<Integer> fullNoDamageYearListItemPosition = new ObservableField<>();
+
+    @Getter
+    private ObservableField<Integer> financialDamageTypeListItemPosition = new ObservableField<>();
+
+    @Getter
+    private ObservableField<Integer> lifeDamageTypeListItemPosition = new ObservableField<>();
+
+    @Getter
+    private ObservableField<Integer> availableYearsItemPosition = new ObservableField<>();
 
 
 
-//    @Getter @Setter
-//    private MutableLiveData<Integer> brandListItemPosition = new MutableLiveData<>();
-//    @Getter @Setter
-//    private MutableLiveData<Integer> damageStatusListItemPosition = new MutableLiveData<>();
-//    @Getter @Setter
-//    private MutableLiveData<Integer> fullNoDamageYearListItemPosition = new MutableLiveData<>();
-//    @Getter @Setter
-//    private MutableLiveData<Integer> financialDamageTypeListItemPosition = new MutableLiveData<>();
-//    @Getter @Setter
-//    private MutableLiveData<Integer> lifeDamageTypeListItemPosition = new MutableLiveData<>();
-//    @Getter @Setter
-//    private MutableLiveData<Integer> availableYearsItemPosition = new MutableLiveData<>();
-//
+
 //    @Getter @Setter
 //    private MutableLiveData<String> brandListItemValue = new MutableLiveData<>();
 //    @Getter @Setter
@@ -103,6 +126,7 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
         super();
 
         setProgressBrandModelVisible(false);
+        spnBrandModelActivate.set(false);
 
         loadMainMenus();
     }
@@ -116,6 +140,12 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     {
         brandListEntries.clear();
         brandListEntries.addAll(list);
+    }
+
+    public void setBrandModelListEntries(List<CarModelList> list)
+    {
+        brandModelListEntries.clear();
+        brandModelListEntries.addAll(list);
     }
 
     public void setDamageStatusListEntries(List<ItemsList> list)
@@ -159,20 +189,68 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
         getNavigator().openThirdPartyInqueryActivity();
     }
 
-    private void OnModelBrandItemSelected(int brandId)
+    @Override
+    public void onBrandChange(int position)
     {
+        brandListItemPosition.set(position);
+        if (position != 0)
+        {
+            setProgressBrandModelVisible(true);
+            spnBrandModelActivate.set(true);
+            OnModelBrandItemSelected(brandList.get(position).getValue());
+        }
+        else
+        {
+            setProgressBrandModelVisible(false);
+            spnBrandModelActivate.set(false);
 
+
+
+
+        }
     }
 
-    public void onSelectItemSpinner()
+    private void OnModelBrandItemSelected(String brandId)
     {
+        SingletonService.getInstance().thirdBrandModelService().setThirdPartyBrandModelListService(brandId, new OnServiceStatus<ThirdPartyBrandModelListResponse>()
+        {
+            @Override
+            public void onReady(ThirdPartyBrandModelListResponse thirdPartyBrandModelListResponse)
+            {
+                setProgressBrandModelVisible(false);
 
+                CarModelList items = new CarModelList();
+                items.setInsCarModelId(0);
+                items.setInsCarTypeId(0);
+                items.setPassengerCount(0);
+                items.setModelName("--انتخاب کنید--");
+                items.setInsCarType("");
+
+                brandModelList.clear();
+
+                brandModelList.add(items);
+                brandModelList.addAll(thirdPartyBrandModelListResponse.getCarModelList());
+                brandModelListEntriesLive.setValue(brandModelList);
+
+            }
+
+            @Override
+            public void onError(String message)
+            {
+                setProgressBrandModelVisible(false);
+                spnBrandModelActivate.set(false);
+
+                Logger.e("--onError--", "onError: " + message);
+                //Show Error
+            }
+        });
     }
 
     public void onDatePickerClick()
     {
-        String dateStr = "1398-05-02";
-        updateTvDate(dateStr);
+        getNavigator().openDatePicker();
+//        String dateStr = "1398-05-02";
+//        updateTvDate(dateStr);
     }
 
     @Override

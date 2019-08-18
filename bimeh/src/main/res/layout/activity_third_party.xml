@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/tools"
+    tools:context=".view.activity.thirdParty.ThirdPartyActivity">
 
     <data>
 
@@ -22,8 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/windowsBackgroundColor"
-        android:orientation="vertical"
-        tools:context=".view.activity.thirdParty.ThirdPartyActivity">
+        android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -97,7 +97,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
-                            app:activate="@{viewModel.progressBrandModelVisible}"
+                            bind:activate="@{viewModel.spnBrandModelActivate}"
                             android:background="@drawable/spinner_background">
 
                             <ImageView
@@ -115,15 +115,18 @@
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
+                                bind:selectedPosition="@={viewModel.brandModelListItemPosition}"
                                 app:adapter="@{spinnerAdapterBrandModel}"
+                                bind:activate="@{viewModel.spnBrandModelActivate}"
+                                bind:modelAdapter="@{viewModel.brandModelListEntries}"
                                 android:layout_marginRight="3dp"
                                 android:background="@null" />
 
                             <ProgressBar
                                 android:id="@+id/progressBrandModel"
                                 android:layout_width="match_parent"
-                                bind:visibile="@{viewModel.progressBrandModelVisible}"
-                                android:layout_height="30dp" />
+                                android:layout_height="30dp"
+                                bind:visible="@{viewModel.progressBrandModelVisible}" />
 
                         </RelativeLayout>
 
@@ -158,8 +161,9 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                bind:my_adapter="@{viewModel.brandListEntries}"
-                                android:background="@null" />
+                                android:background="@null"
+                                android:onItemSelected="@{(parent, view, pos, id) -> viewModel.onBrandChange(pos)}"
+                                bind:my_adapter="@{viewModel.brandListEntries}" />
 
                         </RelativeLayout>
 
@@ -263,6 +267,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
+                                bind:selectedPosition="@={viewModel.availableYearsItemPosition}"
                                 bind:my_adapter="@{viewModel.availableYearsEntries}"
                                 android:background="@null" />
 
@@ -332,6 +337,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
+                            bind:selectedPosition="@={viewModel.damageStatusListItemPosition}"
                             bind:my_adapter="@{viewModel.damageStatusListEntries}"
                             android:background="@null" />
 
@@ -362,6 +368,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="3dp"
+                            bind:selectedPosition="@={viewModel.fullNoDamageYearListItemPosition}"
                             bind:my_adapter="@{viewModel.fullNoDamageYearListEntries}"
                             android:background="@null" />
 
@@ -406,6 +413,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
+                                bind:selectedPosition="@={viewModel.financialDamageTypeListItemPosition}"
                                 bind:my_adapter="@{viewModel.financialDamageTypeListEntries}"
                                 android:background="@null" />
 
@@ -463,6 +471,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
+                                bind:selectedPosition="@={viewModel.lifeDamageTypeListItemPosition}"
                                 bind:my_adapter="@{viewModel.lifeDamageTypeListEntries}"
                                 android:background="@null" />
 
