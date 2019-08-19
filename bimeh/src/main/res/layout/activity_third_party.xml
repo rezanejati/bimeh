@@ -19,85 +19,417 @@
             type="android.widget.ArrayAdapter"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/windowsBackgroundColor"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="@style/MyMaterialTheme.AppBarOverlay">
+            android:layout_height="match_parent"
+            android:background="@color/windowsBackgroundColor"
+            android:orientation="vertical">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/MyMaterialTheme.PopupOverlay">
+                android:theme="@style/MyMaterialTheme.AppBarOverlay">
 
-                <include layout="@layout/toolbar" />
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/MyMaterialTheme.PopupOverlay">
 
-            </android.support.v7.widget.Toolbar>
+                    <include layout="@layout/toolbar" />
 
-        </android.support.design.widget.AppBarLayout>
+                </android.support.v7.widget.Toolbar>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            </android.support.design.widget.AppBarLayout>
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="3"
-                        android:gravity="right"
-                        android:text="مدل خودرو"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/textColorTitle" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="مدل خودرو"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/textColorTitle" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="برند خودرو"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/textColorTitle" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="2"
-                        android:gravity="right"
-                        android:text="برند خودرو"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/textColorTitle" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3">
+                        android:orientation="horizontal">
 
                         <RelativeLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                bind:activate="@{viewModel.spnBrandModelActivate}"
+                                android:background="@drawable/spinner_background">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="2dp"
+                                    android:src="@drawable/ic_menu_down_24dp"
+                                    android:tint="@color/menuColor" />
+
+                                <android.support.v7.widget.AppCompatSpinner
+                                    android:id="@+id/spinnerBrandModel"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="8dp"
+                                    bind:selectedPosition="@={viewModel.brandModelListItemPosition}"
+                                    app:adapter="@{spinnerAdapterBrandModel}"
+                                    bind:activate="@{viewModel.spnBrandModelActivate}"
+                                    bind:modelAdapter="@{viewModel.brandModelListEntries}"
+                                    android:layout_marginRight="3dp"
+                                    android:background="@null" />
+
+                                <ProgressBar
+                                    android:id="@+id/progressBrandModel"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    bind:visible="@{viewModel.progressBrandModelVisible}" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/spinner_background">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="2dp"
+                                    android:src="@drawable/ic_menu_down_24dp"
+                                    android:tint="@color/menuColor" />
+
+                                <android.support.v7.widget.AppCompatSpinner
+                                    android:id="@+id/spinnerBrand"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginRight="3dp"
+                                    android:background="@null"
+                                    android:onItemSelected="@{(parent, view, pos, id) -> viewModel.onBrandChange(pos)}"
+                                    bind:my_adapter="@{viewModel.brandListEntries}" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="بیمه گر قبلی"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/textColorTitle" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="سال ساخت"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/textColorTitle" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/spinner_background">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="2dp"
+                                    android:src="@drawable/ic_menu_down_24dp"
+                                    android:tint="@color/menuColor" />
+
+                                <android.support.v7.widget.AppCompatSpinner
+                                    android:id="@+id/spinnerLastCompany"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginRight="3dp"
+                                    bind:selectedPosition="@={viewModel.companyListItemPosition}"
+                                    bind:my_adapter="@{viewModel.companyListEntries}"
+                                    android:background="@null" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/spinner_background">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="2dp"
+                                    android:src="@drawable/ic_menu_down_24dp"
+                                    android:tint="@color/menuColor" />
+
+                                <android.support.v7.widget.AppCompatSpinner
+                                    android:id="@+id/spinnerCreateDate"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginRight="3dp"
+                                    bind:selectedPosition="@={viewModel.availableYearsItemPosition}"
+                                    bind:my_adapter="@{viewModel.availableYearsEntries}"
+                                    android:background="@null" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="2"
+                            android:gravity="right"
+                            android:text="تاریخ سررسید بیمه نامه قبلی"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/textColorTitle" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="2"
+                            android:gravity="right"
+                            android:text="تاریخ شروع بیمه نامه قبلی"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/textColorTitle" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/spinner_background">
+
+                                <TextView
+                                    android:id="@+id/tvFinalDate"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="28dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginRight="3dp"
+                                    android:background="@null"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:gravity="center"
+                                    android:clickable="true"
+                                    android:text="@{viewModel.tvFinalDate}"
+                                    android:onClick="@{() -> viewModel.onFinalDatePickerClick()}"
+                                    android:drawableLeft="@drawable/ic_calendar_black_24dp"
+                                    android:drawableTint="@color/menuColor" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@drawable/spinner_background">
+
+                                <TextView
+                                    android:id="@+id/tvCreateDate"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="28dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_marginRight="3dp"
+                                    android:background="@null"
+                                    android:textColor="@color/textColorPrimary"
+                                    android:gravity="center"
+                                    android:clickable="true"
+                                    android:text="@{viewModel.tvCreateDate}"
+                                    android:onClick="@{() -> viewModel.onCreateDatePickerClick()}"
+                                    android:drawableLeft="@drawable/ic_calendar_black_24dp"
+                                    android:drawableTint="@color/menuColor" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="2"
+                            android:gravity="right"
+                            android:text="تخفیف عدم خسارت بیمه نامه قبلی"
+                            android:textSize="@dimen/textSize_12dp"
+                            android:textColor="@color/textColorTitle" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="2"
+                            android:gravity="right"
+                            android:text="وضعیت خسارت"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/textColorTitle" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
                             android:layout_height="30dp"
+                            android:layout_weight="2"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
-                            bind:activate="@{viewModel.spnBrandModelActivate}"
                             android:background="@drawable/spinner_background">
 
                             <ImageView
@@ -110,36 +442,22 @@
                                 android:tint="@color/menuColor" />
 
                             <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/spinnerBrandModel"
+                                android:id="@+id/spinnerDamageDiscount"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
-                                bind:selectedPosition="@={viewModel.brandModelListItemPosition}"
-                                app:adapter="@{spinnerAdapterBrandModel}"
-                                bind:activate="@{viewModel.spnBrandModelActivate}"
-                                bind:modelAdapter="@{viewModel.brandModelListEntries}"
                                 android:layout_marginRight="3dp"
+                                bind:selectedPosition="@={viewModel.damageStatusListItemPosition}"
+                                bind:my_adapter="@{viewModel.damageStatusListEntries}"
                                 android:background="@null" />
 
-                            <ProgressBar
-                                android:id="@+id/progressBrandModel"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                bind:visible="@{viewModel.progressBrandModelVisible}" />
-
                         </RelativeLayout>
 
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2">
-
                         <RelativeLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="30dp"
+                            android:layout_weight="2"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
@@ -155,358 +473,197 @@
                                 android:tint="@color/menuColor" />
 
                             <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/spinnerBrand"
+                                android:id="@+id/spinnerDamageStatus"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
-                                android:background="@null"
-                                android:onItemSelected="@{(parent, view, pos, id) -> viewModel.onBrandChange(pos)}"
-                                bind:my_adapter="@{viewModel.brandListEntries}" />
+                                bind:selectedPosition="@={viewModel.fullNoDamageYearListItemPosition}"
+                                bind:my_adapter="@{viewModel.fullNoDamageYearListEntries}"
+                                android:background="@null" />
 
                         </RelativeLayout>
 
-                    </RelativeLayout>
+                    </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:id="@+id/llDamageView"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="3"
-                        android:gravity="right"
-                        android:text="تاریخ سررسید بیمه نامه"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/textColorTitle" />
+                        bind:visible="@{viewModel.fullNoDamageYearListItemPosition == 1 ? true : false}"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="2"
-                        android:gravity="right"
-                        android:text="سال ساخت"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/textColorTitle" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                </LinearLayout>
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal">
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginRight="8dp"
+                                    android:background="@drawable/spinner_background">
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3">
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="2dp"
+                                        android:src="@drawable/ic_menu_down_24dp"
+                                        android:tint="@color/menuColor" />
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/spinner_background">
+                                    <android.support.v7.widget.AppCompatSpinner
+                                        android:id="@+id/spinnerFinancialDamageCount"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="8dp"
+                                        android:layout_marginRight="3dp"
+                                        bind:selectedPosition="@={viewModel.financialDamageTypeListItemPosition}"
+                                        bind:my_adapter="@{viewModel.financialDamageTypeListEntries}"
+                                        android:background="@null" />
+
+                                </RelativeLayout>
+
+                            </RelativeLayout>
 
                             <TextView
-                                android:id="@+id/tvDate"
-                                android:layout_width="match_parent"
-                                android:layout_height="28dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="3dp"
-                                android:background="@null"
-                                android:textColor="@color/textColorPrimary"
-                                android:gravity="center"
-                                android:clickable="true"
-                                android:text="@{viewModel.tvDate}"
-                                android:onClick="@{() -> viewModel.onDatePickerClick()}"
-                                android:drawableLeft="@drawable/ic_calendar_black_24dp"
-                                android:drawableTint="@color/menuColor" />
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="8dp"
+                                android:layout_weight="4"
+                                android:gravity="right|center_vertical"
+                                android:text="تعداد خسارت مالی در سال گذشته"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/textColorTitle" />
 
-                        </RelativeLayout>
+                        </LinearLayout>
 
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/spinner_background">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="2dp"
-                                android:src="@drawable/ic_menu_down_24dp"
-                                android:tint="@color/menuColor" />
-
-                            <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/spinnerCreateDate"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="3dp"
-                                bind:selectedPosition="@={viewModel.availableYearsItemPosition}"
-                                bind:my_adapter="@{viewModel.availableYearsEntries}"
-                                android:background="@null" />
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="3"
-                        android:gravity="right"
-                        android:text="تخفیف عدم خسارت بیمه نامه قبلی"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/textColorTitle" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="2"
-                        android:gravity="right"
-                        android:text="وضعیت خسارت"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/textColorTitle" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="3"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:background="@drawable/spinner_background">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="2dp"
-                            android:src="@drawable/ic_menu_down_24dp"
-                            android:tint="@color/menuColor" />
-
-                        <android.support.v7.widget.AppCompatSpinner
-                            android:id="@+id/spinnerDamageDiscount"
+                        <LinearLayout
+                            android:id="@+id/layDamage"
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="3dp"
-                            bind:selectedPosition="@={viewModel.damageStatusListItemPosition}"
-                            bind:my_adapter="@{viewModel.damageStatusListEntries}"
-                            android:background="@null" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="2"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:background="@drawable/spinner_background">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="2dp"
-                            android:src="@drawable/ic_menu_down_24dp"
-                            android:tint="@color/menuColor" />
+                            android:layout_marginBottom="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                        <android.support.v7.widget.AppCompatSpinner
-                            android:id="@+id/spinnerDamageStatus"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="3dp"
-                            bind:selectedPosition="@={viewModel.fullNoDamageYearListItemPosition}"
-                            bind:my_adapter="@{viewModel.fullNoDamageYearListEntries}"
-                            android:background="@null" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/spinner_background">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="2dp"
-                                android:src="@drawable/ic_menu_down_24dp"
-                                android:tint="@color/menuColor" />
+                                android:layout_weight="3">
 
-                            <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/spinnerFinancialDamageCount"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="3dp"
-                                bind:selectedPosition="@={viewModel.financialDamageTypeListItemPosition}"
-                                bind:my_adapter="@{viewModel.financialDamageTypeListEntries}"
-                                android:background="@null" />
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginTop="4dp"
+                                    android:layout_marginRight="8dp"
+                                    android:background="@drawable/spinner_background">
 
-                        </RelativeLayout>
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="2dp"
+                                        android:src="@drawable/ic_menu_down_24dp"
+                                        android:tint="@color/menuColor" />
 
-                    </RelativeLayout>
+                                    <android.support.v7.widget.AppCompatSpinner
+                                        android:id="@+id/spinnerDeathDamageCount"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="8dp"
+                                        android:layout_marginRight="3dp"
+                                        bind:selectedPosition="@={viewModel.lifeDamageTypeListItemPosition}"
+                                        bind:my_adapter="@{viewModel.lifeDamageTypeListEntries}"
+                                        android:background="@null" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="4"
-                        android:gravity="right|center_vertical"
-                        android:text="تعداد خسارت مالی در سال گذشته"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/textColorTitle" />
+                                </RelativeLayout>
 
-                </LinearLayout>
+                            </RelativeLayout>
 
-                <LinearLayout
-                    android:id="@+id/layDamage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="8dp"
+                                android:layout_weight="4"
+                                android:gravity="right|center_vertical"
+                                android:text="تعداد خسارت جانی در سال گذشته"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/textColorTitle" />
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3">
+                        </LinearLayout>
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginRight="8dp"
-                            android:background="@drawable/spinner_background">
+                    </LinearLayout>
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="2dp"
-                                android:src="@drawable/ic_menu_down_24dp"
-                                android:tint="@color/menuColor" />
-
-                            <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/spinnerDeathDamageCount"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="3dp"
-                                bind:selectedPosition="@={viewModel.lifeDamageTypeListItemPosition}"
-                                bind:my_adapter="@{viewModel.lifeDamageTypeListEntries}"
-                                android:background="@null" />
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="8dp"
-                        android:layout_weight="4"
-                        android:gravity="right|center_vertical"
-                        android:text="تعداد خسارت جانی در سال گذشته"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/textColorTitle" />
+                    <Button
+                        android:id="@+id/btnConfirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/button_large"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="استعلام"
+                        android:textColor="@color/textColorTitle"
+                        android:onClick="@{() -> viewModel.OnClickInquery()}"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnConfirm"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/button_large"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:text="استعلام"
-                    android:textColor="@color/textColorTitle"
-                    android:onClick="@{() -> viewModel.OnClickInquery()}"
-                    android:textStyle="bold" />
+            </ScrollView>
 
-            </LinearLayout>
+        </LinearLayout>
 
-        </ScrollView>
+        <!--<include-->
+            <!--layout="@layout/loading"-->
+            <!--bind:visible="@{viewModel.isLoading}" />-->
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rlLoading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/loadingBackgroundColor"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <!--bind:visible="@{viewModel.isLoading}">-->
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_250dp_r"
+                android:layout_gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="lottie/loading_shetac.json"
+                app:lottie_loop="true"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorSecondary"
+                android:textAppearance="@style/IranSansBold"
+                android:textSize="@dimen/textSize_14dp"
+                android:text="در حال دریافت اطلاعات..."
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </layout>
