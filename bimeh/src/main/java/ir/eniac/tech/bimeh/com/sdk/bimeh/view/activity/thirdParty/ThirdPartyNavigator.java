@@ -4,5 +4,8 @@ public interface ThirdPartyNavigator
 {
     void openThirdPartyInqueryActivity();
 
-    void openDatePicker();
+    void openCreateDatePicker();
+
+    void openFinalDatePicker();
+
 }

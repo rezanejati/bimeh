@@ -4,17 +4,12 @@ import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
-import android.support.v7.widget.AppCompatSpinner;
-import android.widget.Spinner;
-
-import com.android.databinding.library.baseAdapters.BR;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.SingletonService;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.listener.OnServiceStatus;
-//import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.CompanyList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyBrandModelList.others.CarModelList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyBrandModelList.response.ThirdPartyBrandModelListResponse;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.ItemsList;
@@ -25,23 +20,26 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.BaseViewModel;
 import lombok.Getter;
 import lombok.Setter;
 
-import static ir.eniac.tech.bimeh.com.sdk.bimeh.BR.spinnerAdapterBrandModel;
-import static ir.eniac.tech.bimeh.com.sdk.bimeh.BR.viewModel;
-
 public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> implements OnServiceStatus<ThirdPartyFirstResponse>,
         SpinnerBrandChangeListener
 {
     @Getter @Setter
-    private ObservableField<String> tvDate = new ObservableField<>();
-    //    public String tvDate;
+    private ObservableField<String> tvCreateDate = new ObservableField<>();
+
+    @Getter @Setter
+    private ObservableField<String> tvFinalDate = new ObservableField<>();
 
     @Getter
     private ObservableField<Boolean> progressBrandModelVisible = new ObservableField<>();
     @Getter
     private ObservableField<Boolean> spnBrandModelActivate = new ObservableField<>();
 
+    @Getter
+    private ObservableField<Boolean> isLoading = new ObservableField<>();
+
     private List<ItemsList> brandList = new ArrayList<>();
     private List<CarModelList> brandModelList = new ArrayList<>();
+    private List<ItemsList> companyList = new ArrayList<>();
     private List<ItemsList> damageStatusList = new ArrayList<>();
     private List<ItemsList> fullNoDamageYearList = new ArrayList<>();
     private List<ItemsList> financialDamageTypeList = new ArrayList<>();
@@ -62,6 +60,11 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     private ObservableList<ItemsList> damageStatusListEntries = new ObservableArrayList<>();
     @Getter
     private MutableLiveData<List<ItemsList>> damageStatusListEntriesLive = new MutableLiveData<>();
+
+    @Getter
+    private ObservableList<ItemsList> companyListEntries = new ObservableArrayList<>();
+    @Getter
+    private MutableLiveData<List<ItemsList>> companyListEntriesLive = new MutableLiveData<>();
 
     @Getter
     private ObservableList<ItemsList> fullNoDamageYearListEntries = new ObservableArrayList<>();
@@ -92,6 +95,9 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 
     @Getter
     private ObservableField<Integer> damageStatusListItemPosition = new ObservableField<>();
+
+    @Getter
+    private ObservableField<Integer> companyListItemPosition = new ObservableField<>();
 
     @Getter
     private ObservableField<Integer> fullNoDamageYearListItemPosition = new ObservableField<>();
@@ -127,8 +133,14 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 
         setProgressBrandModelVisible(false);
         spnBrandModelActivate.set(false);
+//        setIsLoading(true);
 
         loadMainMenus();
+    }
+
+    public void setIsLoading(Boolean loading)
+    {
+        isLoading.set(loading);
     }
 
     public void setProgressBrandModelVisible(Boolean isVisible)
@@ -152,6 +164,12 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     {
         damageStatusListEntries.clear();
         damageStatusListEntries.addAll(list);
+    }
+
+    public void setCompanyListEntries(List<ItemsList> list)
+    {
+        companyListEntries.clear();
+        companyListEntries.addAll(list);
     }
 
     public void setFullNoDamageYearListEntries(List<ItemsList> list)
@@ -180,6 +198,8 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
 
     public void loadMainMenus()
     {
+        setIsLoading(true);
+
         SingletonService.getInstance().thirdPartyFirstService().setThirdPartyFirstAPIService(this);
     }
 
@@ -246,16 +266,21 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
         });
     }
 
-    public void onDatePickerClick()
+    public void onCreateDatePickerClick()
     {
-        getNavigator().openDatePicker();
-//        String dateStr = "1398-05-02";
-//        updateTvDate(dateStr);
+        getNavigator().openCreateDatePicker();
+    }
+
+    public void onFinalDatePickerClick()
+    {
+        getNavigator().openFinalDatePicker();
     }
 
     @Override
     public void onReady(ThirdPartyFirstResponse thirdPartyFirstResponse)
     {
+        setIsLoading(false);
+
         Logger.e("--onReady--", thirdPartyFirstResponse.getResponseStatus().getValue());
         if (!thirdPartyFirstResponse.getResponseStatus().getValue().equals("200"))
         {
@@ -294,7 +319,11 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
         damageStatusList.addAll(thirdPartyFirstResponse.getDamageStatusList());
         damageStatusListEntriesLive.setValue(damageStatusList);
 
-        fullNoDamageYearList.add(items);
+        companyList.add(items);
+        companyList.addAll(thirdPartyFirstResponse.getCompanyList());
+        companyListEntriesLive.setValue(companyList);
+
+//        fullNoDamageYearList.add(items);
         fullNoDamageYearList.addAll(thirdPartyFirstResponse.getFullNoDamageYearList());
         fullNoDamageYearListEntriesLive.setValue(fullNoDamageYearList);
 
@@ -317,13 +346,20 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
     @Override
     public void onError(String message)
     {
+        setIsLoading(false);
+
         Logger.e("--onError--", "onError: " + message);
         //Show Error
     }
 
-    public void updateTvDate(String date)
+    public void updateTvCreateDate(String date)
     {
-        tvDate.set(date);
+        tvCreateDate.set(date);
+    }
+
+    public void updateTvFinalDate(String date)
+    {
+        tvFinalDate.set(date);
     }
 
 }

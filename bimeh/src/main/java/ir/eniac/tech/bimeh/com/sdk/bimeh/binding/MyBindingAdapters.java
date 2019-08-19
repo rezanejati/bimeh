@@ -160,7 +160,7 @@ public class MyBindingAdapters
 
 
     @BindingAdapter("bind:visible")
-    public static void setVisiblity(View view, Boolean isVisible)
+    public static void setVisibility(View view, Boolean isVisible)
     {
         view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }

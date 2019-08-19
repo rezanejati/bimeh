@@ -96,4 +96,7 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="IranSansBold" parent="android:TextAppearance">
+        <item name="fontPath">fonts/iran_sans_bold.ttf</item>
+    </style>
 </resources>

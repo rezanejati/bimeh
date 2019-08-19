@@ -2,9 +2,6 @@ package ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty;
 
 //import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.preference.DialogPreference;
-import android.view.View;
-import android.widget.DatePicker;
 import android.widget.Toast;
 
 import ir.eniac.tech.bimeh.com.sdk.bimeh.BR;
@@ -18,7 +15,14 @@ import library.android.calendar.mohamadamin.persianmaterialdatetimepicker.utils.
 public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyNavigator,
         DatePickerDialog.OnDateSetListener
 {
-    private DatePickerDialog datePickerDialog;
+    private DatePickerDialog pickerDialogCreateDate, pickerDialogFinalDate;
+
+    private int year = 0;
+    private int month = 0;
+    private int day = 0;
+    private int year_today = 0;
+    private int month_today = 0;
+    private int day_today = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,13 +45,13 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 
         subscribeToLiveData();
 
-//        dataBinding.tvDate.setOnClickListener(new View.OnClickListener()
+//        dataBinding.tvCreateDate.setOnClickListener(new View.OnClickListener()
 //        {
 //            @Override
 //            public void onClick(View v)
 //            {
 //                String dateStr = "1398-05-02";
-//                viewModel.updateTvDate(dateStr);
+//                viewModel.updateTvCreateDate(dateStr);
 //            }
 //        });
     }
@@ -56,13 +60,13 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
     {
         PersianCalendar calendar = new PersianCalendar();
 
-        datePickerDialog = DatePickerDialog.newInstance(this,
+        pickerDialogCreateDate = DatePickerDialog.newInstance(this,
                 calendar.getPersianYear(),
                 calendar.getPersianMonth(),
                 calendar.getPersianDay()
         );
 
-        datePickerDialog.setMinDate(calendar);
+//        pickerDialogCreateDate.setMinDate(calendar);
 
     }
 
@@ -76,18 +80,19 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
     {
 
 
-//        dataBinding.tvDate.setText(viewModel.getTvDate().getValue());
+//        dataBinding.tvCreateDate.setText(viewModel.getTvCreateDate().getValue());
 
 
 
-        dataBinding.spinnerBrandModel.setSelection(0);
-        dataBinding.spinnerBrandModel.setGravity(View.TEXT_ALIGNMENT_CENTER);
+//        dataBinding.spinnerBrandModel.setSelection(0);
+//        dataBinding.spinnerBrandModel.setGravity(View.TEXT_ALIGNMENT_CENTER);
 
+//        viewModel.setIsLoading(false);
 
 //        viewModel.loadMainMenus();
-//        dataBinding.tvDate.setText(viewModel.getTvDate().getValue());
-//        dataBinding.tvDate.setText("1398/06/01");
-//        viewModel.getTvDate().
+//        dataBinding.tvCreateDate.setText(viewModel.getTvCreateDate().getValue());
+//        dataBinding.tvCreateDate.setText("1398/06/01");
+//        viewModel.getTvCreateDate().
     }
 
     @Override
@@ -109,49 +114,93 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 /*
         viewModel.setTest("1398/06/01");
         dataBinding.setViewModel(viewModel);*/
-        //  dataBinding.tvDate.setText("1398/06/01");
+        //  dataBinding.tvCreateDate.setText("1398/06/01");
 //        Intent intent = MainActivity.newIntent(LoginActivity.this);
 //        startActivity(intent);
     }
 
     @Override
-    public void openDatePicker()
+    public void openCreateDatePicker()
     {
 
-        if (datePickerDialog.isAdded())
+        if (pickerDialogCreateDate.isAdded() || pickerDialogFinalDate.isAdded())
         {
             return;
         }
 
-        datePickerDialog.setTitle("");
-        datePickerDialog.show(getSupportFragmentManager(), "DatePickerDialog");
+        pickerDialogCreateDate.setTitle("");
+        pickerDialogCreateDate.show(getSupportFragmentManager(), "CreateDate");
+    }
+
+    @Override
+    public void openFinalDatePicker()
+    {
+
     }
 
     private void subscribeToLiveData()
     {
         viewModel.getBrandListEntriesLive().observe(this, viewModel::setBrandListEntries);
 
-        viewModel.getBrandModelListEntriesLive().observe(this, list -> viewModel.setBrandModelListEntries(list));
+        viewModel.getBrandModelListEntriesLive().observe(this, viewModel::setBrandModelListEntries);
 
-        viewModel.getDamageStatusListEntriesLive().observe(this, list -> viewModel.setDamageStatusListEntries(list));
+        viewModel.getCompanyListEntriesLive().observe(this, viewModel::setCompanyListEntries);
 
-        viewModel.getFinancialDamageTypeListEntriesLive().observe(this, list -> viewModel.setFinancialDamageTypeListEntries(list));
+        viewModel.getDamageStatusListEntriesLive().observe(this, viewModel::setDamageStatusListEntries);
 
-        viewModel.getFullNoDamageYearListEntriesLive().observe(this, list -> viewModel.setFullNoDamageYearListEntries(list));
+        viewModel.getFinancialDamageTypeListEntriesLive().observe(this, viewModel::setFinancialDamageTypeListEntries);
 
-        viewModel.getLifeDamageTypeListEntriesLive().observe(this, list -> viewModel.setLifeDamageTypeListEntries(list));
+        viewModel.getFullNoDamageYearListEntriesLive().observe(this, viewModel::setFullNoDamageYearListEntries);
 
-        viewModel.getAvailableYearsEntriesLive().observe(this, list -> viewModel.setAvailableYearsEntries(list));
+        viewModel.getLifeDamageTypeListEntriesLive().observe(this, viewModel::setLifeDamageTypeListEntries);
+
+        viewModel.getAvailableYearsEntriesLive().observe(this, viewModel::setAvailableYearsEntries);
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int endYear, int endMonth, int endDay)
     {
-        PersianCalendar calendar = new PersianCalendar();
-        calendar.set(year, monthOfYear, dayOfMonth);
-        datePickerDialog.setPersianCalendar(calendar);
+        if (view.getTag().equals("CreateDate"))
+        {
+            PersianCalendar calendar = new PersianCalendar();
+            calendar.set(year, monthOfYear, dayOfMonth);
+            pickerDialogCreateDate.setPersianCalendar(calendar);
 
-        String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-        viewModel.updateTvDate(date);
+            String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+            viewModel.updateTvCreateDate(date);
+
+            this.year = year;
+            this.month = monthOfYear;
+            this.day = dayOfMonth;
+
+            PersianCalendar calendar1 = new PersianCalendar();
+            PersianCalendar calendar2 = new PersianCalendar();
+            calendar1.set(year, monthOfYear, dayOfMonth);
+            calendar2.set(year_today, month_today, day_today);
+
+            pickerDialogCreateDate.setPersianCalendar(calendar1);
+
+            if (calendar1.getTimeInMillis() > calendar2.getTimeInMillis())
+            {
+                viewModel.updateTvFinalDate(date);
+            }
+
+        }
+        else if (view.getTag().equals("FinalDate"))
+        {
+            PersianCalendar calendar = new PersianCalendar();
+
+            String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+            viewModel.updateTvFinalDate(date);
+
+            this.year_today = year;
+            this.month_today = monthOfYear;
+            this.day_today = dayOfMonth;
+
+            calendar.set(year_today, month_today, day_today);
+            pickerDialogFinalDate.setPersianCalendar(calendar);
+
+            return;
+        }
     }
 }
