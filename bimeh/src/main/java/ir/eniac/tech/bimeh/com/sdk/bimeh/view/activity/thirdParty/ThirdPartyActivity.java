@@ -27,7 +27,7 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewMode
 
 public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyNavigator
 {
-    private ArrayAdapter<String> arrayAdapter;
+    private SpinnerArrayAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,7 +38,7 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 //        viewModel.setSpinnerData(this);
 
 
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item);
+        arrayAdapter = new SpinnerArrayAdapter(this, R.layout.my_spinner_item);
         arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
 
         dataBinding.spinnerBrand.setSelection(0);

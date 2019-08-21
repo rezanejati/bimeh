@@ -19,6 +19,7 @@
         android:supportsRtl="false"
         android:theme="@style/MyMaterialTheme"
         tools:replace="android:supportsRtl"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity">
             <intent-filter>
