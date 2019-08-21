@@ -1,6 +1,6 @@
-package ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty;
+package ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdPartyMain;
 
-//import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -10,12 +10,13 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.BR;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.R;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.databinding.ActivityThirdPartyBinding;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Tools;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdPartyInquery.ThirdPartyInqueryActivity;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.base.BaseActivity;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel;
 import library.android.calendar.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import library.android.calendar.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
-public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyNavigator,
+public class ThirdPartyMainMainActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyMainNavigator,
         DatePickerDialog.OnDateSetListener
 {
     private DatePickerDialog pickerDialogCreateDate, pickerDialogFinalDate;
@@ -33,30 +34,13 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         super.onCreate(savedInstanceState);
         viewModel.setNavigator(this);
 
-        initView();
+        dataBinding.toolbar.findViewById(R.id.imgMenu).setOnClickListener(v -> finish());
+        ((TextView) dataBinding.toolbar.findViewById(R.id.tvTitle)).setText("بیمه شخص ثالث");
 
         initDate();
-//        viewModel.setSpinnerData(this);
-
-
-//        arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_item);
-//        arrayAdapter.setDropDownViewResource(R.layout.my_spinner_textview);
-//
-//        dataBinding.spinnerBrand.setSelection(0);
-//        dataBinding.spinnerBrand.setGravity(View.TEXT_ALIGNMENT_CENTER);
-//        dataBinding.setSpinnerAdapterBrand(arrayAdapter);
 
         subscribeToLiveData();
 
-//        dataBinding.tvCreateDate.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                String dateStr = "1398-05-02";
-//                viewModel.updateTvCreateDate(dateStr);
-//            }
-//        });
     }
 
     private void initDate()
@@ -74,9 +58,6 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
                 calendar.getPersianMonth(),
                 calendar.getPersianDay() + 1
         );
-
-//        pickerDialogCreateDate.setMinDate(calendar);
-
     }
 
     @Override
@@ -85,24 +66,6 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         return BR.viewModel;
     }
 
-    private void initView()
-    {
-
-
-//        dataBinding.tvCreateDate.setText(viewModel.getTvCreateDate().getValue());
-
-
-
-//        dataBinding.spinnerBrandModel.setSelection(0);
-//        dataBinding.spinnerBrandModel.setGravity(View.TEXT_ALIGNMENT_CENTER);
-
-//        viewModel.setIsLoading(false);
-
-//        viewModel.loadMainMenus();
-//        dataBinding.tvCreateDate.setText(viewModel.getTvCreateDate().getValue());
-//        dataBinding.tvCreateDate.setText("1398/06/01");
-//        viewModel.getTvCreateDate().
-    }
 
     @Override
     protected Class<ThirdPartyViewModel> getViewModel()
@@ -110,11 +73,13 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         return ThirdPartyViewModel.class;
     }
 
+
     @Override
     protected int getLayoutRes()
     {
         return R.layout.activity_third_party;
     }
+
 
     @Override
     public void openThirdPartyInqueryActivity()
@@ -123,8 +88,9 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 
         if (setError())
         {
-//        Intent intent = MainActivity.newIntent(LoginActivity.this);
-//        startActivity(intent);
+            Intent intent = new Intent(this, ThirdPartyInqueryActivity.class);
+
+            startActivity(intent);
         }
     }
 
@@ -191,7 +157,7 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         }
         if (dataBinding.tvFinalDate.getText().toString().equalsIgnoreCase(""))
         {
-            dataBinding.tvCreateDate.setError("تاریخ سررسید بیمه نامه نمیتواند خالی باشد!");
+            dataBinding.tvFinalDate.setError("تاریخ سررسید بیمه نامه نمیتواند خالی باشد!");
             errMessage = errMessage + "تاریخ سررسید بیمه نامه، ";
             err = false;
         }
@@ -199,33 +165,49 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         int spinnerDamageStatusPos = dataBinding.spinnerDamageStatus.getSelectedItemPosition();
         if (spinnerDamageStatusPos != 2)
         {
-            TextView errorText = (TextView) dataBinding.spinnerDamageDiscount.getSelectedView();
-            errorText.setError("!");
-            errorText.setTextColor(Color.RED);
-            errorText.setTextSize(12);
-            errorText.setText("یک آیتم را انتخاب کنید!");
+            if (dataBinding.spinnerDamageDiscount.getSelectedItemPosition() == 0)
+            {
+                TextView errorText = (TextView) dataBinding.spinnerDamageDiscount.getSelectedView();
+                errorText.setError("!");
+                errorText.setTextColor(Color.RED);
+                errorText.setTextSize(12);
+                errorText.setText("یک آیتم را انتخاب کنید!");
 
-            errMessage = errMessage + "تخفیف عدم خسارت، ";
-            err = false;
+                errMessage = errMessage + "تخفیف عدم خسارت، ";
+                err = false;
+            }
         }
         if (spinnerDamageStatusPos == 1)
         {
-            TextView errorText1 = (TextView) dataBinding.spinnerFinancialDamageCount.getSelectedView();
-            TextView errorText2 = (TextView) dataBinding.spinnerDeathDamageCount.getSelectedView();
-            errorText1.setError("!");
-            errorText2.setError("!");
-            errorText1.setTextColor(Color.RED);
-            errorText2.setTextColor(Color.RED);
-            errorText1.setTextSize(12);
-            errorText2.setTextSize(12);
-            errorText1.setText("یک آیتم را انتخاب کنید!");
-            errorText2.setText("یک آیتم را انتخاب کنید!");
+            if (dataBinding.spinnerFinancialDamageCount.getSelectedItemPosition() == 0)
+            {
+                TextView errorText = (TextView) dataBinding.spinnerFinancialDamageCount.getSelectedView();
+                errorText.setError("!");
+                errorText.setTextColor(Color.RED);
+                errorText.setTextSize(12);
+                errorText.setText("یک آیتم را انتخاب کنید!");
 
-            errMessage = errMessage + "تعداد خسارت مالی و جانی، ";
-            err = false;
+                errMessage = errMessage + "تعداد خسارت مالی، ";
+                err = false;
+            }
+            if (dataBinding.spinnerDeathDamageCount.getSelectedItemPosition() == 0)
+            {
+                TextView errorText = (TextView) dataBinding.spinnerDeathDamageCount.getSelectedView();
+                errorText.setError("!");
+                errorText.setTextColor(Color.RED);
+                errorText.setTextSize(12);
+                errorText.setText("یک آیتم را انتخاب کنید!");
+
+                errMessage = errMessage + "تعداد خسارت جانی، ";
+                err = false;
+            }
         }
+        errMessage = errMessage + " نمیتواند خالی باشد!";
 
-        Tools.showToast(this, errMessage, 0, Tools.LONG_TOAST, R.color.colorRedToast);
+        if (!err)
+        {
+            Tools.showToast(this, errMessage, 0, Tools.LONG_TOAST, R.color.colorRedToast);
+        }
 
         return err;
     }
@@ -241,6 +223,7 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
         pickerDialogCreateDate.setTitle("");
         pickerDialogCreateDate.show(getSupportFragmentManager(), "CreateDate");
 
+        dataBinding.tvCreateDate.setError(null);
         dataBinding.tvFinalDate.setError(null);
     }
 

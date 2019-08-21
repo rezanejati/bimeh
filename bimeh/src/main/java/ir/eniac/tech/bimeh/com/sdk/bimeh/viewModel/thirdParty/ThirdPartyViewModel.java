@@ -15,12 +15,12 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyBrandModelList.
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.ItemsList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.response.ThirdPartyFirstResponse;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty.ThirdPartyNavigator;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdPartyMain.ThirdPartyMainNavigator;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.BaseViewModel;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> implements OnServiceStatus<ThirdPartyFirstResponse>,
+public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyMainNavigator> implements OnServiceStatus<ThirdPartyFirstResponse>,
         SpinnerBrandChangeListener
 {
     @Getter @Setter

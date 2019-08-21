@@ -1,6 +1,6 @@
-package ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty;
+package ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdPartyMain;
 
-public interface ThirdPartyNavigator
+public interface ThirdPartyMainNavigator
 {
     void openThirdPartyInqueryActivity();
 
