@@ -643,8 +643,8 @@
             android:background="@color/loadingBackgroundColor"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone">
-            <!--bind:visible="@{viewModel.isLoading}">-->
+            bind:visible="@{viewModel.isLoading}">
+        <!--android:visibility="gone">-->
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottieView"
