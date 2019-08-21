@@ -223,10 +223,6 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyNavigator> impl
         {
             setProgressBrandModelVisible(false);
             spnBrandModelActivate.set(false);
-
-
-
-
         }
     }
 

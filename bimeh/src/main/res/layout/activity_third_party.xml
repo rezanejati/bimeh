@@ -121,7 +121,7 @@
                                     android:layout_marginLeft="8dp"
                                     bind:selectedPosition="@={viewModel.brandModelListItemPosition}"
                                     app:adapter="@{spinnerAdapterBrandModel}"
-                                    bind:activate="@{viewModel.spnBrandModelActivate}"
+                                    bind:activate="@{viewModel.spnBrandModelActivate &amp;&amp; !viewModel.progressBrandModelVisible}"
                                     bind:modelAdapter="@{viewModel.brandModelListEntries}"
                                     android:layout_marginRight="3dp"
                                     android:background="@null" />
@@ -430,6 +430,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
+                            bind:activate="@{viewModel.fullNoDamageYearListItemPosition == 2 ? false : true}"
                             android:background="@drawable/spinner_background">
 
                             <ImageView
@@ -448,6 +449,8 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="3dp"
+                                bind:visible="@{viewModel.fullNoDamageYearListItemPosition == 2 ? true : false}"
+                                bind:activate="@{viewModel.fullNoDamageYearListItemPosition == 2 ? false : true}"
                                 bind:selectedPosition="@={viewModel.damageStatusListItemPosition}"
                                 bind:my_adapter="@{viewModel.damageStatusListEntries}"
                                 android:background="@null" />

@@ -162,7 +162,14 @@ public class MyBindingAdapters
     @BindingAdapter("bind:visible")
     public static void setVisibility(View view, Boolean isVisible)
     {
-        view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        if (view.getId() == R.id.spinnerDamageDiscount)
+        {
+            view.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
+        }
+        else
+        {
+            view.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        }
     }
 
     @BindingAdapter("bind:activate")
@@ -172,7 +179,7 @@ public class MyBindingAdapters
         view.setEnabled(isActive);
         view.setAlpha(isActive ? 1f : 0.5f);
 
-        if (view.getId() == R.id.spinnerBrandModel)
+        if (view.getId() == R.id.spinnerBrandModel || view.getId() == R.id.spinnerDamageDiscount)
         {
             view.setVisibility(isActive ? View.VISIBLE : View.INVISIBLE);
         }

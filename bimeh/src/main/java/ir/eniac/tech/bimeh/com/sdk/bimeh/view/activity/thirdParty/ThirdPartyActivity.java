@@ -1,12 +1,15 @@
 package ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty;
 
 //import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ir.eniac.tech.bimeh.com.sdk.bimeh.BR;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.R;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.databinding.ActivityThirdPartyBinding;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Tools;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.base.BaseActivity;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel;
 import library.android.calendar.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
@@ -66,6 +69,12 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
                 calendar.getPersianDay()
         );
 
+        pickerDialogFinalDate = DatePickerDialog.newInstance(this,
+                calendar.getPersianYear(),
+                calendar.getPersianMonth(),
+                calendar.getPersianDay() + 1
+        );
+
 //        pickerDialogCreateDate.setMinDate(calendar);
 
     }
@@ -111,31 +120,157 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
     public void openThirdPartyInqueryActivity()
     {
         Toast.makeText(this, "open ThirdPartyInqueryActivity", Toast.LENGTH_LONG).show();
-/*
-        viewModel.setTest("1398/06/01");
-        dataBinding.setViewModel(viewModel);*/
-        //  dataBinding.tvCreateDate.setText("1398/06/01");
+
+        if (setError())
+        {
 //        Intent intent = MainActivity.newIntent(LoginActivity.this);
 //        startActivity(intent);
+        }
+    }
+
+    private boolean setError()
+    {
+        boolean err = true;
+        String errMessage = "";
+
+        if (dataBinding.spinnerBrand.getSelectedItemPosition() == 0)
+        {
+            TextView errorText = (TextView) dataBinding.spinnerBrand.getSelectedView();
+            errorText.setError("!");
+            errorText.setTextColor(Color.RED);
+            errorText.setTextSize(12);
+            errorText.setText("یک آیتم را انتخاب کنید!");
+
+            errMessage = errMessage + "برند خودرو، ";
+            err = false;
+        }
+        else
+        {
+            if (dataBinding.spinnerBrandModel.getSelectedItemPosition() == 0)
+            {
+                TextView errorText = (TextView) dataBinding.spinnerBrandModel.getSelectedView();
+                errorText.setError("!");
+                errorText.setTextColor(Color.RED);
+                errorText.setTextSize(12);
+                errorText.setText("یک آیتم را انتخاب کنید!");
+
+                errMessage = errMessage + "مدل برند خودرو، ";
+                err = false;
+            }
+        }
+
+        if (dataBinding.spinnerCreateDate.getSelectedItemPosition() == 0)
+        {
+            TextView errorText = (TextView) dataBinding.spinnerCreateDate.getSelectedView();
+            errorText.setError("!");
+            errorText.setTextColor(Color.RED);
+            errorText.setTextSize(12);
+            errorText.setText("یک آیتم را انتخاب کنید!");
+
+            errMessage = errMessage + "سال ساخت، ";
+            err = false;
+        }
+
+        if (dataBinding.spinnerLastCompany.getSelectedItemPosition() == 0)
+        {
+            TextView errorText = (TextView) dataBinding.spinnerLastCompany.getSelectedView();
+            errorText.setError("!");
+            errorText.setTextColor(Color.RED);
+            errorText.setTextSize(12);
+            errorText.setText("یک آیتم را انتخاب کنید!");
+
+            errMessage = errMessage + "بیمه گر قبلی، ";
+            err = false;
+        }
+
+        if (dataBinding.tvCreateDate.getText().toString().equalsIgnoreCase(""))
+        {
+            dataBinding.tvCreateDate.setError("تاریخ شروع بیمه نامه نمیتواند خالی باشد!");
+            errMessage = errMessage + "تاریخ شروع بیمه نامه، ";
+            err = false;
+        }
+        if (dataBinding.tvFinalDate.getText().toString().equalsIgnoreCase(""))
+        {
+            dataBinding.tvCreateDate.setError("تاریخ سررسید بیمه نامه نمیتواند خالی باشد!");
+            errMessage = errMessage + "تاریخ سررسید بیمه نامه، ";
+            err = false;
+        }
+
+        int spinnerDamageStatusPos = dataBinding.spinnerDamageStatus.getSelectedItemPosition();
+        if (spinnerDamageStatusPos != 2)
+        {
+            TextView errorText = (TextView) dataBinding.spinnerDamageDiscount.getSelectedView();
+            errorText.setError("!");
+            errorText.setTextColor(Color.RED);
+            errorText.setTextSize(12);
+            errorText.setText("یک آیتم را انتخاب کنید!");
+
+            errMessage = errMessage + "تخفیف عدم خسارت، ";
+            err = false;
+        }
+        if (spinnerDamageStatusPos == 1)
+        {
+            TextView errorText1 = (TextView) dataBinding.spinnerFinancialDamageCount.getSelectedView();
+            TextView errorText2 = (TextView) dataBinding.spinnerDeathDamageCount.getSelectedView();
+            errorText1.setError("!");
+            errorText2.setError("!");
+            errorText1.setTextColor(Color.RED);
+            errorText2.setTextColor(Color.RED);
+            errorText1.setTextSize(12);
+            errorText2.setTextSize(12);
+            errorText1.setText("یک آیتم را انتخاب کنید!");
+            errorText2.setText("یک آیتم را انتخاب کنید!");
+
+            errMessage = errMessage + "تعداد خسارت مالی و جانی، ";
+            err = false;
+        }
+
+        Tools.showToast(this, errMessage, 0, Tools.LONG_TOAST, R.color.colorRedToast);
+
+        return err;
     }
 
     @Override
     public void openCreateDatePicker()
     {
-
-        if (pickerDialogCreateDate.isAdded() || pickerDialogFinalDate.isAdded())
-        {
-            return;
-        }
+//        if (pickerDialogCreateDate.isAdded() || pickerDialogFinalDate.isAdded())
+//        {
+//            return;
+//        }
 
         pickerDialogCreateDate.setTitle("");
         pickerDialogCreateDate.show(getSupportFragmentManager(), "CreateDate");
+
+        dataBinding.tvFinalDate.setError(null);
     }
 
     @Override
     public void openFinalDatePicker()
     {
+        PersianCalendar calendar = new PersianCalendar();
 
+        calendar.set(year, month, day+1);
+        pickerDialogFinalDate.setPersianCalendar(calendar);
+
+        try
+        {
+            if (year == 0)
+            {
+                dataBinding.tvFinalDate.setError("تاریخ شروع بیمه نامه نمیتواند خالی باشد!");
+                Tools.showToast(this, "ابتدا باید تاریخ شروع بیمه نامه قبلی انتخاب گردد!", 0, Tools.LONG_TOAST, getResources().getColor(R.color.colorRedToast));
+            }
+            else
+            {
+                dataBinding.tvFinalDate.setError(null);
+                pickerDialogFinalDate.setMinDate(calendar);
+                pickerDialogFinalDate.show(getSupportFragmentManager(), "FinalDate");
+            }
+        }
+        catch (NullPointerException e)
+        {
+            dataBinding.tvFinalDate.setError("تاریخ شروع بیمه نامه نمیتواند خالی باشد!");
+            Tools.showToast(this, "ابتدا باید تاریخ شروع بیمه نامه قبلی انتخاب گردد!", 0, Tools.LONG_TOAST, getResources().getColor(R.color.colorRedToast));
+        }
     }
 
     private void subscribeToLiveData()
@@ -166,8 +301,9 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
             calendar.set(year, monthOfYear, dayOfMonth);
             pickerDialogCreateDate.setPersianCalendar(calendar);
 
-            String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-            viewModel.updateTvCreateDate(date);
+            String createDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+            String finalDate = year + "-" + (monthOfYear + 1) + "-" + (dayOfMonth + 1);
+            viewModel.updateTvCreateDate(createDate);
 
             this.year = year;
             this.month = monthOfYear;
@@ -182,7 +318,7 @@ public class ThirdPartyActivity extends BaseActivity<ActivityThirdPartyBinding, 
 
             if (calendar1.getTimeInMillis() > calendar2.getTimeInMillis())
             {
-                viewModel.updateTvFinalDate(date);
+                viewModel.updateTvFinalDate(finalDate);
             }
 
         }
