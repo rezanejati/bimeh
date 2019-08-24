@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.pixplicity.easyprefs.library.Prefs;
+
 public class MainActivity extends AppCompatActivity
 {
 
@@ -15,6 +17,8 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Prefs.putString("insuranceToken", "da4aa2f8-70d9-4d56-b577-3162dfae2c0f");
 
         buttonl = findViewById(R.id.buttonl);
         buttonl.setOnClickListener(v ->

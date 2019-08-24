@@ -27,7 +27,7 @@
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:scaleType="centerInside"
                 android:src="@drawable/bank_dey_logo"/>
 

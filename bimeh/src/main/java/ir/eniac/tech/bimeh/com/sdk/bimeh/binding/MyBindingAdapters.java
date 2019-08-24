@@ -7,7 +7,6 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,6 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.R;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyBrandModelList.others.CarModelList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.ItemsList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.SpinnerBrandChangeListener;
 
 public class MyBindingAdapters
 {

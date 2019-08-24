@@ -12,7 +12,7 @@
 
         <variable
             name="viewModel"
-            type="ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel" />
+            type="ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdPartyMain.ThirdPartyMainViewModel" />
 
         <variable
             name="spinnerAdapterBrandModel"

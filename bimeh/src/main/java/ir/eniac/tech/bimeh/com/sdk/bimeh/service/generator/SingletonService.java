@@ -6,6 +6,7 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.EniacApplication;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.di.component.NetComponent;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.part.thirdPartyBrandModelList.ThirdPartyBrandModelListService;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.part.thirdPartyFirstAPI.ThirdPartyFirstAPIService;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.part.thirdPartyInquiryService.ThirdPartyInquiryService;
 import okhttp3.OkHttpClient;
 
 /**
@@ -62,9 +63,14 @@ public class SingletonService
         return new ThirdPartyFirstAPIService(serviceGenerator);
     }
 
-    public ThirdPartyBrandModelListService thirdBrandModelService()
+    public ThirdPartyBrandModelListService thirdPartyBrandModelService()
     {
         return new ThirdPartyBrandModelListService(serviceGenerator);
+    }
+
+    public ThirdPartyInquiryService thirdPartyInquiryService()
+    {
+        return new ThirdPartyInquiryService(serviceGenerator);
     }
 
 

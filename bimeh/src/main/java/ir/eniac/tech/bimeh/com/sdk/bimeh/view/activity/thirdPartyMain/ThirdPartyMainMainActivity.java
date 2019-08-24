@@ -12,11 +12,11 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.databinding.ActivityThirdPartyBinding;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Tools;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdPartyInquery.ThirdPartyInqueryActivity;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.base.BaseActivity;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdPartyMain.ThirdPartyMainViewModel;
 import library.android.calendar.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import library.android.calendar.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
-public class ThirdPartyMainMainActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyViewModel> implements ThirdPartyMainNavigator,
+public class ThirdPartyMainMainActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyMainViewModel> implements ThirdPartyMainNavigator,
         DatePickerDialog.OnDateSetListener
 {
     private DatePickerDialog pickerDialogCreateDate, pickerDialogFinalDate;
@@ -68,9 +68,9 @@ public class ThirdPartyMainMainActivity extends BaseActivity<ActivityThirdPartyB
 
 
     @Override
-    protected Class<ThirdPartyViewModel> getViewModel()
+    protected Class<ThirdPartyMainViewModel> getViewModel()
     {
-        return ThirdPartyViewModel.class;
+        return ThirdPartyMainViewModel.class;
     }
 
 
@@ -89,7 +89,18 @@ public class ThirdPartyMainMainActivity extends BaseActivity<ActivityThirdPartyB
         if (setError())
         {
             Intent intent = new Intent(this, ThirdPartyInqueryActivity.class);
-
+            intent.putExtra("BrandId", viewModel.getBrandList().get(viewModel.getBrandListItemPosition().get()).getValue());
+            intent.putExtra("ModelId", viewModel.getBrandModelList().get(viewModel.getBrandModelListItemPosition().get()).getInsCarModelId());
+            intent.putExtra("BuildYear", viewModel.getAvailableYears().get(viewModel.getAvailableYearsItemPosition().get()).getValue());
+            intent.putExtra("PreviousExpiration", dataBinding.tvFinalDate.getText().toString().trim());
+            intent.putExtra("previousCompanyId", viewModel.getCompanyList().get(viewModel.getCompanyListItemPosition().get()).getValue());
+            intent.putExtra("previousStartDate", dataBinding.tvCreateDate.getText().toString().trim());
+            intent.putExtra("DamageStatusId", viewModel.getDamageStatusList().get(viewModel.getDamageStatusListItemPosition().get()).getValue());
+            intent.putExtra("NoDamageYearId", viewModel.getFullNoDamageYearList().get(viewModel.getFullNoDamageYearListItemPosition().get()).getValue());
+            intent.putExtra("LifeDamageTypeId", viewModel.getLifeDamageTypeList().get(viewModel.getLifeDamageTypeListItemPosition().get()).getValue());
+            intent.putExtra("FinancialDamageTypeId", viewModel.getFinancialDamageTypeList().get(viewModel.getFinancialDamageTypeListItemPosition().get()).getValue());
+            intent.putExtra("UniqueTypeId", 1);
+            intent.putExtra("InsurancePeriodId", "");
             startActivity(intent);
         }
     }

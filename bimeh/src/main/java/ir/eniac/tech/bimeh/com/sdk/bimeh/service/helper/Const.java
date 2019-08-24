@@ -12,10 +12,11 @@ public class Const
 
     public static Boolean TEST = false;
 
-    public final static String BASEURL = "https://restcore.bimeh.com/";
-//    public final static String BASEURL = "http://192.168.20.242:1031/MainService.svc/";
+//    public final static String BASEURL = "https://restcore.bimeh.com/";
+    public final static String BASEURL = "http://test.bimeh.com:8082/";
 
     public final static String ThirdPartyFirstAPI = "ThirdParty/FirstRequest";
     public final static String ThirdPartyBrandModelList = "ThirdParty/ModelList";
+    public final static String ThirdPartyInquiry = "ThirdParty/Inquiry";
 
 }

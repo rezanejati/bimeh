@@ -1,4 +1,4 @@
-package ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty;
+package ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdPartyMain;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableArrayList;
@@ -20,7 +20,7 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.BaseViewModel;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyMainNavigator> implements OnServiceStatus<ThirdPartyFirstResponse>,
+public class ThirdPartyMainViewModel extends BaseViewModel<ThirdPartyMainNavigator> implements OnServiceStatus<ThirdPartyFirstResponse>,
         SpinnerBrandChangeListener
 {
     @Getter @Setter
@@ -37,13 +37,21 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyMainNavigator> 
     @Getter
     private ObservableField<Boolean> isLoading = new ObservableField<>();
 
+    @Getter
     private List<ItemsList> brandList = new ArrayList<>();
+    @Getter
     private List<CarModelList> brandModelList = new ArrayList<>();
+    @Getter
     private List<ItemsList> companyList = new ArrayList<>();
+    @Getter
     private List<ItemsList> damageStatusList = new ArrayList<>();
+    @Getter
     private List<ItemsList> fullNoDamageYearList = new ArrayList<>();
+    @Getter
     private List<ItemsList> financialDamageTypeList = new ArrayList<>();
+    @Getter
     private List<ItemsList> lifeDamageTypeList = new ArrayList<>();
+    @Getter
     private List<ItemsList> availableYears = new ArrayList<>();
 
     @Getter
@@ -127,7 +135,7 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyMainNavigator> 
 //    @Getter @Setter
 //    private MutableLiveData<String> availableYearsItemValue = new MutableLiveData<>();
 
-    public ThirdPartyViewModel()
+    public ThirdPartyMainViewModel()
     {
         super();
 
@@ -228,7 +236,7 @@ public class ThirdPartyViewModel extends BaseViewModel<ThirdPartyMainNavigator> 
 
     private void OnModelBrandItemSelected(String brandId)
     {
-        SingletonService.getInstance().thirdBrandModelService().setThirdPartyBrandModelListService(brandId, new OnServiceStatus<ThirdPartyBrandModelListResponse>()
+        SingletonService.getInstance().thirdPartyBrandModelService().setThirdPartyBrandModelListService(brandId, new OnServiceStatus<ThirdPartyBrandModelListResponse>()
         {
             @Override
             public void onReady(ThirdPartyBrandModelListResponse thirdPartyBrandModelListResponse)
