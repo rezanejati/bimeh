@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import ir.eniac.tech.bimeh.com.sdk.bimeh.EniacApplication;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.di.component.NetComponent;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.part.thirdPartyBrandModelList.ThirdPartyBrandModelListService;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.part.thirdPartyFirstAPI.ThirdPartyFirstAPIService;
 import okhttp3.OkHttpClient;
 
@@ -59,6 +60,11 @@ public class SingletonService
     public ThirdPartyFirstAPIService thirdPartyFirstService()
     {
         return new ThirdPartyFirstAPIService(serviceGenerator);
+    }
+
+    public ThirdPartyBrandModelListService thirdBrandModelService()
+    {
+        return new ThirdPartyBrandModelListService(serviceGenerator);
     }
 
 

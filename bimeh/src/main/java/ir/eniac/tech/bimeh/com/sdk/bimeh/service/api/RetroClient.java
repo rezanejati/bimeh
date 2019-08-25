@@ -14,5 +14,5 @@ public interface RetroClient
     Single<Response<ThirdPartyFirstResponse>> GetThirdPartyFirstAPI();
 
     @GET(Const.ThirdPartyBrandModelList + "/{brandId}")
-    Single<Response<ThirdPartyBrandModelListResponse>> GetBrandModelList(@Path("brandId") int brandId);
+    Single<Response<ThirdPartyBrandModelListResponse>> GetBrandModelList(@Path("brandId") String brandId);
 }
