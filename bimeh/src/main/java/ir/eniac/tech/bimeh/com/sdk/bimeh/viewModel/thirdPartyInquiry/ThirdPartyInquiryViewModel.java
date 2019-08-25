@@ -1,41 +1,38 @@
 package ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdPartyInquiry;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableField;
+import android.databinding.ObservableList;
+import android.util.Log;
 
 import java.util.List;
 
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.ServiceGenerator;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.SingletonService;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.listener.OnServiceStatus;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyInquiry.request.ThirdPartyInquiryRequest;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyInquiry.response.ThirdInquiryList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyInquiry.response.ThirdInquiryItem;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyInquiry.response.ThirdPartyInquiryResponse;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdPartyInquery.ThirdPartyInqueryNavigator;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.BaseViewModel;
+import lombok.Getter;
 
 public class ThirdPartyInquiryViewModel extends BaseViewModel<ThirdPartyInqueryNavigator> implements OnServiceStatus<ThirdPartyInquiryResponse>
 {
-    private final MutableLiveData<List<ThirdInquiryList>> thirdInqueryListLiveData;
-
-    public String BrandId;
-    public String ModelId;
-    public String BuildYear;
-    public String PreviousExpiration;
-    public String previousCompanyId;
-    public String previousStartDate;
-    public String DamageStatusId;
-    public String NoDamageYearId;
-    public String LifeDamageTypeId;
-    public String FinancialDamageTypeId;
+    @Getter
+//    private final MutableLiveData<List<ThirdInquiryItem>> thirdInqueryListLiveData;
+    private final ObservableList<ThirdInquiryItem> thirdInqueryListLiveData;
 
     public ThirdPartyInquiryViewModel()
     {
         super();
-        thirdInqueryListLiveData = new MutableLiveData<>();
-        getData();
+//        thirdInqueryListLiveData = new MutableLiveData<>();
+        thirdInqueryListLiveData = new ObservableArrayList<>();
     }
 
-    private void getData()
+    public void getData(String BrandId, String ModelId, String BuildYear, String PreviousExpiration, String previousCompanyId,
+            String previousStartDate, String DamageStatusId, String NoDamageYearId, String LifeDamageTypeId, String FinancialDamageTypeId)
     {
         ThirdPartyInquiryRequest request = new ThirdPartyInquiryRequest();
         request.setBrandId(BrandId);
@@ -58,11 +55,28 @@ public class ThirdPartyInquiryViewModel extends BaseViewModel<ThirdPartyInqueryN
     public void onReady(ThirdPartyInquiryResponse thirdPartyInquiryResponse)
     {
 
+        if (!thirdPartyInquiryResponse.getResponseStatus().getValue().equalsIgnoreCase("200"))
+        {
+            //Show Error
+            return;
+        }
+
+        setThirdInqueryListLiveData(thirdPartyInquiryResponse.getThirdInquiryList());
     }
 
     @Override
     public void onError(String message)
     {
 
+        Logger.e("--onError--", "onError: " + message);
+        //Show Error
+
     }
+
+    public void setThirdInqueryListLiveData(List<ThirdInquiryItem> thirdInquiryList)
+    {
+//        thirdInqueryListLiveData.setValue(thirdInquiryList);
+        thirdInqueryListLiveData.addAll(thirdInquiryList);
+    }
+
 }

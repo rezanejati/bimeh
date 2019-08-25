@@ -96,6 +96,7 @@
                             android:layout_weight="1">
 
                             <RelativeLayout
+                                android:id="@+id/rl"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_vertical"
@@ -119,11 +120,10 @@
                                     android:layout_height="30dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginLeft="8dp"
-                                    bind:selectedPosition="@={viewModel.brandModelListItemPosition}"
-                                    app:adapter="@{spinnerAdapterBrandModel}"
-                                    bind:activate="@{viewModel.spnBrandModelActivate &amp;&amp; !viewModel.progressBrandModelVisible}"
-                                    bind:modelAdapter="@{viewModel.brandModelListEntries}"
                                     android:layout_marginRight="3dp"
+                                    bind:selectedPosition="@={viewModel.brandModelListItemPosition}"
+                                    bind:modelAdapter="@{viewModel.brandModelListEntries}"
+                                    bind:activate="@{viewModel.spnBrandModelActivate &amp;&amp; !viewModel.progressBrandModelVisible}"
                                     android:background="@null" />
 
                                 <ProgressBar

@@ -59,8 +59,8 @@
                         android:id="@+id/recyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:listitem="@layout/adapter_third_party_inquery"/>
-                        <!--app:adapter="@{viewModel}"/>-->
+                        tools:listitem="@layout/adapter_third_party_inquery"
+                        bind:recyclerAdapter="@{viewModel.thirdInqueryListLiveData}"/>
 
                 </LinearLayout>
 

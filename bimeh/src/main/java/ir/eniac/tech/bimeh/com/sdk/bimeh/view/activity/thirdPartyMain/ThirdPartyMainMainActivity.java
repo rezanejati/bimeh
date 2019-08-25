@@ -9,12 +9,14 @@ import android.widget.Toast;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.BR;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.R;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.databinding.ActivityThirdPartyBinding;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Tools;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdPartyInquery.ThirdPartyInqueryActivity;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.base.BaseActivity;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdPartyMain.ThirdPartyMainViewModel;
 import library.android.calendar.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import library.android.calendar.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
+import saman.zamani.persiandate.PersianDate;
 
 public class ThirdPartyMainMainActivity extends BaseActivity<ActivityThirdPartyBinding, ThirdPartyMainViewModel> implements ThirdPartyMainNavigator,
         DatePickerDialog.OnDateSetListener
@@ -84,17 +86,20 @@ public class ThirdPartyMainMainActivity extends BaseActivity<ActivityThirdPartyB
     @Override
     public void openThirdPartyInqueryActivity()
     {
-        Toast.makeText(this, "open ThirdPartyInqueryActivity", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "open ThirdPartyInqueryActivity", Toast.LENGTH_LONG).show();
 
         if (setError())
         {
+            Logger.e("--Model Id--", String.valueOf(viewModel.getBrandModelListItemPosition()));
+            Logger.e("--Model Pos--", String.valueOf(viewModel.getBrandModelList().get(viewModel.getBrandModelListItemPosition().get()).getInsCarModelId()));
+
             Intent intent = new Intent(this, ThirdPartyInqueryActivity.class);
             intent.putExtra("BrandId", viewModel.getBrandList().get(viewModel.getBrandListItemPosition().get()).getValue());
-            intent.putExtra("ModelId", viewModel.getBrandModelList().get(viewModel.getBrandModelListItemPosition().get()).getInsCarModelId());
+            intent.putExtra("ModelId", String.valueOf(viewModel.getBrandModelList().get(viewModel.getBrandModelListItemPosition().get()).getInsCarModelId()));
             intent.putExtra("BuildYear", viewModel.getAvailableYears().get(viewModel.getAvailableYearsItemPosition().get()).getValue());
-            intent.putExtra("PreviousExpiration", dataBinding.tvFinalDate.getText().toString().trim());
+            intent.putExtra("PreviousExpiration", getGrgDate(dataBinding.tvFinalDate.getText().toString().trim()));
             intent.putExtra("previousCompanyId", viewModel.getCompanyList().get(viewModel.getCompanyListItemPosition().get()).getValue());
-            intent.putExtra("previousStartDate", dataBinding.tvCreateDate.getText().toString().trim());
+            intent.putExtra("previousStartDate", getGrgDate(dataBinding.tvCreateDate.getText().toString().trim()));
             intent.putExtra("DamageStatusId", viewModel.getDamageStatusList().get(viewModel.getDamageStatusListItemPosition().get()).getValue());
             intent.putExtra("NoDamageYearId", viewModel.getFullNoDamageYearList().get(viewModel.getFullNoDamageYearListItemPosition().get()).getValue());
             intent.putExtra("LifeDamageTypeId", viewModel.getLifeDamageTypeList().get(viewModel.getLifeDamageTypeListItemPosition().get()).getValue());
@@ -269,7 +274,9 @@ public class ThirdPartyMainMainActivity extends BaseActivity<ActivityThirdPartyB
 
     private void subscribeToLiveData()
     {
-        viewModel.getBrandListEntriesLive().observe(this, viewModel::setBrandListEntries);
+        viewModel.getBrandListEntriesLive().observe(this, list -> {
+            viewModel.setBrandListEntries(list);
+        });
 
         viewModel.getBrandModelListEntriesLive().observe(this, viewModel::setBrandModelListEntries);
 
@@ -333,4 +340,33 @@ public class ThirdPartyMainMainActivity extends BaseActivity<ActivityThirdPartyB
             return;
         }
     }
+
+
+    private String getGrgDate(String dateStr)
+    {
+        String spliter = "-";
+        String[] date = dateStr.split(spliter);
+
+        PersianDate persianDate = new PersianDate();
+        persianDate.setShYear(Integer.parseInt(date[0]));
+        persianDate.setShMonth(Integer.parseInt(date[1]));
+        persianDate.setShDay(Integer.parseInt(date[2]));
+
+        String month = String.valueOf(persianDate.getGrgMonth());
+        String day = String.valueOf(persianDate.getGrgDay());
+
+        if (persianDate.getGrgMonth() < 10)
+        {
+            month = "0" + month;
+        }
+        if (persianDate.getGrgDay() < 10)
+        {
+            day = "0" + day;
+        }
+
+        String newDate = persianDate.getGrgYear() + "-" + month + "-" + day;
+
+        return newDate;
+    }
+
 }

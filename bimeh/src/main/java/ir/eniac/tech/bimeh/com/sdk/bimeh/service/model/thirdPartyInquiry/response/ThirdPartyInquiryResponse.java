@@ -8,7 +8,7 @@ public class ThirdPartyInquiryResponse {
 
     @SerializedName("ThirdInquiryList")
     @Expose
-    private List<ThirdInquiryList> thirdInquiryList = null;
+    private List<ThirdInquiryItem> thirdInquiryList = null;
     @SerializedName("CompanyList")
     @Expose
     private List<CompanyList> companyList = null;
@@ -22,11 +22,11 @@ public class ThirdPartyInquiryResponse {
     @Expose
     private ResponseStatus responseStatus;
 
-    public List<ThirdInquiryList> getThirdInquiryList() {
+    public List<ThirdInquiryItem> getThirdInquiryList() {
         return thirdInquiryList;
     }
 
-    public void setThirdInquiryList(List<ThirdInquiryList> thirdInquiryList) {
+    public void setThirdInquiryList(List<ThirdInquiryItem> thirdInquiryList) {
         this.thirdInquiryList = thirdInquiryList;
     }
 

@@ -15,6 +15,7 @@ import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyBrandModelList.
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.ItemsList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.response.ThirdPartyFirstResponse;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Tools;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdPartyMain.ThirdPartyMainNavigator;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.BaseViewModel;
 import lombok.Getter;
@@ -142,6 +143,8 @@ public class ThirdPartyMainViewModel extends BaseViewModel<ThirdPartyMainNavigat
         setProgressBrandModelVisible(false);
         spnBrandModelActivate.set(false);
 //        setIsLoading(true);
+        lifeDamageTypeListItemPosition.set(0);
+        financialDamageTypeListItemPosition.set(0);
 
         loadMainMenus();
     }
@@ -243,6 +246,12 @@ public class ThirdPartyMainViewModel extends BaseViewModel<ThirdPartyMainNavigat
             {
                 setProgressBrandModelVisible(false);
 
+                if (!thirdPartyBrandModelListResponse.getResponseStatus().getValue().equalsIgnoreCase("200"))
+                {
+                    //Show Error
+                    return;
+                }
+
                 CarModelList items = new CarModelList();
                 items.setInsCarModelId(0);
                 items.setInsCarTypeId(0);
@@ -256,6 +265,7 @@ public class ThirdPartyMainViewModel extends BaseViewModel<ThirdPartyMainNavigat
                 brandModelList.addAll(thirdPartyBrandModelListResponse.getCarModelList());
                 brandModelListEntriesLive.setValue(brandModelList);
 
+                Logger.e("--brandModelList size--", (String.valueOf(brandModelListEntries.size())));
             }
 
             @Override

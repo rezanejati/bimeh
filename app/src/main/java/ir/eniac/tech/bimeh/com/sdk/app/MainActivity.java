@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Prefs.putString("insuranceToken", "da4aa2f8-70d9-4d56-b577-3162dfae2c0f");
+//        Prefs.putString("insuranceToken", "da4aa2f8-70d9-4d56-b577-3162dfae2c0f");
+        Prefs.putString("insuranceToken", "86a75e11-3997-11e9-8fee-005056b43abe");
 
         buttonl = findViewById(R.id.buttonl);
         buttonl.setOnClickListener(v ->
