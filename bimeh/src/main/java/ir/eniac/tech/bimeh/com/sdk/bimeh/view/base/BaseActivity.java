@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.BaseViewModel;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public abstract class BaseActivity<D extends ViewDataBinding, V extends BaseViewModel> extends AppCompatActivity
+public abstract class  BaseActivity<D extends ViewDataBinding, V extends BaseViewModel> extends AppCompatActivity
 {
     private ProgressDialog mProgressDialog;
     protected D dataBinding;

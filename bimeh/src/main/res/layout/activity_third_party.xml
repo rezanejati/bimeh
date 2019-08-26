@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:bind="http://schemas.android.com/tools"
-    tools:context=".view.activity.thirdParty.ThirdPartyActivity">
+    tools:context=".view.activity.thirdPartyMain.ThirdPartyMainMainActivity">
 
     <data>
 
@@ -12,7 +12,7 @@
 
         <variable
             name="viewModel"
-            type="ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.ThirdPartyViewModel" />
+            type="ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdPartyMain.ThirdPartyMainViewModel" />
 
         <variable
             name="spinnerAdapterBrandModel"
@@ -96,6 +96,7 @@
                             android:layout_weight="1">
 
                             <RelativeLayout
+                                android:id="@+id/rl"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_vertical"
@@ -119,11 +120,10 @@
                                     android:layout_height="30dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_marginLeft="8dp"
-                                    bind:selectedPosition="@={viewModel.brandModelListItemPosition}"
-                                    app:adapter="@{spinnerAdapterBrandModel}"
-                                    bind:activate="@{viewModel.spnBrandModelActivate &amp;&amp; !viewModel.progressBrandModelVisible}"
-                                    bind:modelAdapter="@{viewModel.brandModelListEntries}"
                                     android:layout_marginRight="3dp"
+                                    bind:selectedPosition="@={viewModel.brandModelListItemPosition}"
+                                    bind:modelAdapter="@{viewModel.brandModelListEntries}"
+                                    bind:activate="@{viewModel.spnBrandModelActivate &amp;&amp; !viewModel.progressBrandModelVisible}"
                                     android:background="@null" />
 
                                 <ProgressBar

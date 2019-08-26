@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdPartyInquiry.ThirdPartyInquiryItemViewModel" />
+
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="2dp"
+        app:cardBackgroundColor="@color/cardViewBackgroundPrimary"
+        app:contentPadding="2dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/card_background"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/view1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center_vertical"
+                        android:layout_gravity="center"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:background="@drawable/background_red"
+                        android:textColor="@color/mdtp_white"
+                        android:textStyle="bold"
+                        android:text="@{viewModel.tvDiscount}"/>
+                    <!--bind:visible='@{viewModel.isDiscountVisible}'-->
+
+                    <ImageView
+                        android:id="@+id/imgLogo"
+                        android:layout_width="@dimen/_70dp"
+                        android:layout_height="@dimen/_70dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="@dimen/_10dp"
+                        android:layout_marginLeft="@dimen/_10dp"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        bind:imageUrl="@{viewModel.imgLogo}"
+                        android:src="@drawable/ic_filter_black_24dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_toRightOf="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvFinancialSupport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/textSize_18dp"
+                        android:text="@{viewModel.tvFinancialSupport, default = سلام}"/>
+
+                    <TextView
+                        android:id="@+id/tvDeathSupport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/textSize_18dp"
+                        android:text="@{viewModel.tvDeathSupport}"/>
+
+                    <TextView
+                        android:id="@+id/tvDriverEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/textSize_18dp"
+                        android:text="@{viewModel.tvDriverEvents}"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnInstallments"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/background_yellow"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="خرید اقساطی"
+                        android:textColor="@color/textColorTitle"
+                    android:onClick="@{() -> viewModel.onInstallmentButtonClick()}"
+                    android:textStyle="bold" />
+                    <!--bind:visible='@{viewModel.isInstallmentButtonVisible}'-->
+
+                    <Button
+                        android:id="@+id/btnCash"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/background_green"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="خرید نقدی"
+                        android:textColor="@color/textColorTitle"
+                        android:onClick="@{() -> viewModel.onCashButtonClick()}"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvPriceOld"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30dp"
+                        android:gravity="center"
+                        android:paddingRight="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSize_16dp"
+                        android:text="@{viewModel.tvPriceOld}"/>
+
+                    <TextView
+                        android:id="@+id/tvPriceFinally"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30dp"
+                        android:gravity="center"
+                        android:paddingRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:textColor="@color/textColorContent"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/textSize_18dp"
+                        android:text="@{viewModel.tvPriceFinally}"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+</layout>

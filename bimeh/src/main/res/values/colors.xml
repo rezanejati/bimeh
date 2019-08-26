@@ -6,7 +6,7 @@
     <color name="textColorPrimary">#000</color>
     <color name="textColorSecondary">#fff</color>
     <color name="textColorTitle">#000</color>
-    <color name="textColorContent">#000</color>
+    <color name="textColorContent">#00796B</color>
     <color name="windowsBackgroundColor">#F5F5F5</color>
 
     <color name="menuColorBackground">#fff</color>
@@ -19,6 +19,7 @@
     <color name="menuColor">#00796B</color>
     <color name="spinnerColorBorder">#00796B</color>
     <color name="buttonBackgroundColor">#4DB6AC</color>
+    <color name="buttonBackgroundColorSecond">#FFD75F</color>
 
 
     <!--calendar-->
@@ -77,6 +78,10 @@
     <color name="colorRedToast">#800e10</color>
     <color name="colorGreenToast">#0e8019</color>
     <color name="colorGrayToast">#cc666666</color>
+    <color name="fabColorIcon">#000</color>
+    <color name="new_app_color">#C0A763</color>
+    <color name="currentColor">#f2e190</color>
+    <color name="fabColorBackground">#DFCB6F</color>
 
 
 </resources>

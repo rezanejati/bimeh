@@ -8,7 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
-import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdParty.ThirdPartyActivity;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.view.activity.thirdPartyMain.ThirdPartyMainMainActivity;
 
 public class MainBimeh extends AppCompatActivity
 {
@@ -35,7 +35,7 @@ public class MainBimeh extends AppCompatActivity
 
         layThirdParty.setOnClickListener(v ->
         {
-            startActivity(new Intent(this, ThirdPartyActivity.class));
+            startActivity(new Intent(this, ThirdPartyMainMainActivity.class));
         });
 
     }

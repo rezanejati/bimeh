@@ -1,13 +1,17 @@
 package ir.eniac.tech.bimeh.com.sdk.bimeh.binding;
 
+import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.InverseBindingAdapter;
 import android.databinding.InverseBindingListener;
 import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +19,9 @@ import java.util.List;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.R;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyBrandModelList.others.CarModelList;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyFirstAPI.other.ItemsList;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyInquiry.response.ThirdInquiryItem;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
-import ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty.SpinnerBrandChangeListener;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.view.adapter.ThirdPartyInquiryAdapter;
 
 public class MyBindingAdapters
 {
@@ -183,6 +188,37 @@ public class MyBindingAdapters
         {
             view.setVisibility(isActive ? View.VISIBLE : View.INVISIBLE);
         }
+    }
+
+    @BindingAdapter("bind:imageUrl")
+    public static void setImageUrl(ImageView imageView, String url)
+    {
+        Context context = imageView.getContext();
+        Picasso.with(context).load(url).into(imageView);
+    }
+
+    @BindingAdapter({"bind:recyclerAdapter"})
+    public static void addItems(RecyclerView recyclerView, List<ThirdInquiryItem> items)
+    {
+//        ThirdPartyInquiryAdapter adapter = (ThirdPartyInquiryAdapter) recyclerView.getAdapter();
+        ThirdPartyInquiryAdapter adapter = new ThirdPartyInquiryAdapter(items);
+        if (adapter != null)
+        {
+            if (items != null)
+            {
+                adapter.onClearItems();
+                adapter.setData(items);
+            }
+            else
+            {
+                Logger.e("--items--", "items is null");
+            }
+        }
+        else
+        {
+            Logger.e("--adapter--", "adapter is null");
+        }
+        recyclerView.setAdapter(adapter);
     }
 
 

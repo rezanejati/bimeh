@@ -12,7 +12,8 @@
     <application
         android:supportsRtl="false"
         android:theme="@style/MyMaterialTheme">
-        <activity android:name=".view.activity.thirdParty.ThirdPartyActivity"></activity>
+        <activity android:name=".view.activity.thirdPartyInquery.ThirdPartyInqueryActivity"></activity>
+        <activity android:name=".view.activity.thirdPartyMain.ThirdPartyMainMainActivity" />
     </application>
 
 </manifest>

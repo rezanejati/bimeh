@@ -3,8 +3,10 @@ package ir.eniac.tech.bimeh.com.sdk.bimeh.di.module;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.pixplicity.easyprefs.library.Prefs;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -12,7 +14,10 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.generator.SingletonService;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -47,6 +52,19 @@ public class NetModule {
         client.readTimeout(60, TimeUnit.SECONDS);
         client.writeTimeout(60, TimeUnit.SECONDS);
         client.addInterceptor(new ChuckInterceptor(SingletonService.getInstance().getContext()));
+
+        client.addInterceptor(new Interceptor()
+        {
+            @Override
+            public Response intercept(Chain chain) throws IOException
+            {
+                Request request = chain.request().newBuilder()
+                        .addHeader("Token", Prefs.getString("insuranceToken", ""))
+                        .build();
+
+                return chain.proceed(request);
+            }
+        });
 
         return client.build();
     }

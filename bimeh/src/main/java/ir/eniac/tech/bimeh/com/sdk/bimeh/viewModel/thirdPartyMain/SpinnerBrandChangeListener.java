@@ -1,4 +1,4 @@
-package ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdParty;
+package ir.eniac.tech.bimeh.com.sdk.bimeh.viewModel.thirdPartyMain;
 
 public interface SpinnerBrandChangeListener
 {
