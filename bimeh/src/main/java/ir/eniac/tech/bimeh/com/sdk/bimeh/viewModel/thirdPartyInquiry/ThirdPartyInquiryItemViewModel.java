@@ -4,6 +4,7 @@ import android.databinding.ObservableField;
 import android.support.annotation.Nullable;
 
 import ir.eniac.tech.bimeh.com.sdk.bimeh.service.model.thirdPartyInquiry.response.ThirdInquiryItem;
+import ir.eniac.tech.bimeh.com.sdk.bimeh.utility.Logger;
 
 public class ThirdPartyInquiryItemViewModel
 {
@@ -22,29 +23,39 @@ public class ThirdPartyInquiryItemViewModel
 
 //    private final ThirdInquiryItem thirdInquiryItemItem;
 
-    public ThirdPartyInquiryItemViewModel(ThirdInquiryItem thirdInquiryItemItem, InquiryAdapterOnItemClick adapterOnItemClick)
+    public ThirdPartyInquiryItemViewModel(ThirdInquiryItem thirdInquiryItem, InquiryAdapterOnItemClick adapterOnItemClick)
     {
-        this.adapterOnItemClick = adapterOnItemClick;
-//        this.thirdInquiryItemItem = thirdInquiryItemItem;
-        tvDiscount = new ObservableField<>(String.valueOf(thirdInquiryItemItem.getDiscount()));
-        tvFinancialSupport = new ObservableField<>(String.valueOf(thirdInquiryItemItem.getFinancialCoverage()));
-        tvDeathSupport = new ObservableField<>(String.valueOf(thirdInquiryItemItem.getLifeCoverage()));
-        tvDriverEvents = new ObservableField<>(String.valueOf(thirdInquiryItemItem.getDriverCoverage()));
-        tvPriceOld = new ObservableField<>(String.valueOf(thirdInquiryItemItem.getFirstAmount()));
-        tvPriceFinally = new ObservableField<>(String.valueOf(thirdInquiryItemItem.getFinalAmount()));
-//        imgLogo = new ObservableField<>(String.valueOf(thirdInquiryItemItem.get()));
-        imgLogo = new ObservableField<>("https://www.fnordware.com/superpng/pnggrad16rgb.png");
 
-        isInstallmentButtonVisible = new ObservableField<>();
-        try
+        this.adapterOnItemClick = adapterOnItemClick;
+//        this.thirdInquiryItem = thirdInquiryItem;
+        if (thirdInquiryItem == null)
         {
-            isInstallmentButtonVisible.set(thirdInquiryItemItem.getHasInstallmentPayment());
+            tvDiscount = new ObservableField<>("");
+            tvFinancialSupport = new ObservableField<>("");
+            tvDeathSupport = new ObservableField<>("");
+            tvDriverEvents = new ObservableField<>("");
+            tvPriceOld = new ObservableField<>("");
+            tvPriceFinally = new ObservableField<>("");
+            imgLogo = new ObservableField<>("https://www.fnordware.com/superpng/pnggrad16rgb.png");
+
+            isInstallmentButtonVisible = new ObservableField<>(false);
+            isDiscountVisible = new ObservableField<>(false);
         }
-        catch (NullPointerException e)
+        else
         {
-            isInstallmentButtonVisible.set(false);
+            tvDiscount = new ObservableField<>(String.valueOf(thirdInquiryItem.getDiscount()));
+            tvFinancialSupport = new ObservableField<>(String.valueOf(thirdInquiryItem.getFinancialCoverage()));
+            tvDeathSupport = new ObservableField<>(String.valueOf(thirdInquiryItem.getLifeCoverage()));
+            tvDriverEvents = new ObservableField<>(String.valueOf(thirdInquiryItem.getDriverCoverage()));
+            tvPriceOld = new ObservableField<>(String.valueOf(thirdInquiryItem.getFirstAmount()));
+            tvPriceFinally = new ObservableField<>(String.valueOf(thirdInquiryItem.getFinalAmount()));
+//        imgLogo = new ObservableField<>(String.valueOf(thirdInquiryItem.get()));
+            imgLogo = new ObservableField<>("https://www.fnordware.com/superpng/pnggrad16rgb.png");
+
+            isInstallmentButtonVisible = new ObservableField<>(thirdInquiryItem.getHasInstallmentPayment());
+            isDiscountVisible = new ObservableField<>(thirdInquiryItem.getHasDiscount());
         }
-        isDiscountVisible = new ObservableField<>(thirdInquiryItemItem.getHasDiscount());
+        notifyAll();
     }
 
     public void onCashButtonClick()

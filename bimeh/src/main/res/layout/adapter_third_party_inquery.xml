@@ -55,8 +55,8 @@
                         android:background="@drawable/background_red"
                         android:textColor="@color/mdtp_white"
                         android:textStyle="bold"
-                        bind:visible='@{viewModel.isDiscountVisible}'
                         android:text="@{viewModel.tvDiscount}"/>
+                    <!--bind:visible='@{viewModel.isDiscountVisible}'-->
 
                     <ImageView
                         android:id="@+id/imgLogo"
@@ -91,7 +91,7 @@
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="@dimen/textSize_18dp"
-                        android:text="@{viewModel.tvFinancialSupport}"/>
+                        android:text="@{viewModel.tvFinancialSupport, default = سلام}"/>
 
                     <TextView
                         android:id="@+id/tvDeathSupport"
@@ -146,10 +146,10 @@
                         android:background="@drawable/background_yellow"
                         android:foreground="?attr/selectableItemBackground"
                         android:text="خرید اقساطی"
-                        bind:visible='@{viewModel.isInstallmentButtonVisible}'
                         android:textColor="@color/textColorTitle"
-                        android:onClick="@{() -> viewModel.onInstallmentButtonClick()}"
-                        android:textStyle="bold" />
+                    android:onClick="@{() -> viewModel.onInstallmentButtonClick()}"
+                    android:textStyle="bold" />
+                    <!--bind:visible='@{viewModel.isInstallmentButtonVisible}'-->
 
                     <Button
                         android:id="@+id/btnCash"

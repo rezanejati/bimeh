@@ -82,13 +82,16 @@ public class ThirdPartyInquiryAdapter extends BaseAdapter<BaseViewHolder, ThirdI
         {
             if (thirdInquiryItems != null)
             {
-                ThirdInquiryItem inquiryListItem = thirdInquiryItems.get(position);
-                itemViewModel = new ThirdPartyInquiryItemViewModel(inquiryListItem, this);
-                adapterBinding.setViewModel(itemViewModel);
+                if (thirdInquiryItems.size() > 0)
+                {
+                    ThirdInquiryItem inquiryListItem = thirdInquiryItems.get(position);
+                    itemViewModel = new ThirdPartyInquiryItemViewModel(inquiryListItem, this);
+                    adapterBinding.setViewModel(itemViewModel);
 
-                adapterBinding.tvPriceOld.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+                    adapterBinding.tvPriceOld.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
-                adapterBinding.executePendingBindings();
+                    adapterBinding.executePendingBindings();
+                }
             }
         }
 

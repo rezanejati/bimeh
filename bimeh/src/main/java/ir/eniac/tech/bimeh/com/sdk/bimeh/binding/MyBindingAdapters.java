@@ -200,16 +200,25 @@ public class MyBindingAdapters
     @BindingAdapter({"bind:recyclerAdapter"})
     public static void addItems(RecyclerView recyclerView, List<ThirdInquiryItem> items)
     {
-        ThirdPartyInquiryAdapter adapter = (ThirdPartyInquiryAdapter) recyclerView.getAdapter();
+//        ThirdPartyInquiryAdapter adapter = (ThirdPartyInquiryAdapter) recyclerView.getAdapter();
+        ThirdPartyInquiryAdapter adapter = new ThirdPartyInquiryAdapter(items);
         if (adapter != null)
         {
-            adapter.onClearItems();
-            adapter.setData(items);
+            if (items != null)
+            {
+                adapter.onClearItems();
+                adapter.setData(items);
+            }
+            else
+            {
+                Logger.e("--items--", "items is null");
+            }
         }
         else
         {
             Logger.e("--adapter--", "adapter is null");
         }
+        recyclerView.setAdapter(adapter);
     }
 
 
